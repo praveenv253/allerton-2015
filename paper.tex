@@ -313,6 +313,12 @@ Our objection, on the other hand, is much more fundamental. \emph{Even if} the m
 
 \subsection{Our counter-examples and our main result}
 
+{\color{red} Needs re-write}
+
+This paper considers two experiments (introduced in Section~\ref{sec:sk}) where a transmitter $Tx$ wants to communicate a message to a receiver $Rx$ in presence of a feedback channel (in one experiment, the feedback link is noiseless, while in the other it is noisy). We assume that the experimenter is able to record the transmissions of $Tx$ and $Rx$ using some probing mechanism. Provided with these measurements, the experimenter wants to estimate which node is $Tx$ and which is $Rx$. Our results, derived in Section~\ref{sec:analytical-results} and numerically illustrated in Section~\ref{sec:numerical-results}, show that both Granger causality and Directed Information can incorrectly estimate which node is which. The first experiment is for the (unrealistic) case of communicating across noiseless feedback channels. The second experiment allows for noise in the feedback channel as well. In both cases, linear strategies inspired from the strategy of Schalkwijk and Kailath~\cite{S&K} are used.
+
+Our goal here is to bring out the point that whether Granger causality and Directed Information can be used to interpret direction of information flows is an issue that can be, and perhaps should be, considered using thought experiments on simple communication problems where \emph{information flow direction, and quantity, is already known}. If the prediction of Granger causality, or some other measure of information flow, matches with the known information flow, then that measure can be more confidently used in experiments. While our results strongly suggest that one needs to exercise care in interpreting Granger causality and Directed Information dominance as an indicator for the direction of information flow, there are several shortcomings that need to be addressed in order to understand the issue at depth. These shortcomings are discussed in detail in Section~\ref{sec:conclusions}.
+
 \begin{enumerate}
 	\item Define Granger causal influence and directed info in English again. Define information flow (use examples, or define formally? Formal definition should come in the math sections). Describe the problem again - is the direction of causal influence the same as the direction of information flow?
 	\item Describe the counter-examples in English.
@@ -326,6 +332,9 @@ Our objection, on the other hand, is much more fundamental. \emph{Even if} the m
 \end{enumerate}
 
 \subsection{Possible objections to, and shortcomings of this work}
+
+A review of a previous submission raised several objections to this work, which we seek to clarify here. Further, there are a few shortcomings to our analysis, which could be room for future work.
+
 \begin{enumerate}
 	\item Granger causality vs. true causality - cite Pearl. Our argument is, in spirit, very similar to the common criticism of Granger causality, which states that GC is a statistical quantity. It does not answer the question of true causal influence: if X is turned off, will Y behave differenty? (Need to quote from Pearl here).However, in the situation we are studying, we ask a different question - we wish to understand whether or not GC gives the correct direction of *information flow*. In our analysis, causal influences are present in both directions.
 	\item Circularity - there is no circularity of argument. We are just assuming that there are sufficient number of trials to fully estimate the coefficients of the non-stationary AR process. We describe how this might be achieved in section ... (maybe this should come at the end?)
