@@ -295,22 +295,21 @@ Granger causality computation, in general, requires that the processes in consid
 
 In order to determine the direction of causal influence, the Granger Causality metric (ratio of residual variances) from $\{X\}$ to $\{Y\}$ is \emph{compared} to that from $\{Y\}$ to $\{X\}$. We note here that Granger's original analysis does not compare this metric on forward and reverse links, however, this appears to be commonly done in practice. {\color{red} TODO: Cite Tsachy's paper here.}
 
-While we accept that Granger Causal influence can be accurately computed (provided measurements are taken suitably~\ref{sec:previous-criticisms-of-gc}) and can be useful in many situations~\ref{sec:discussion}, interpreting the direction of Granger Causal influence as the direction of information flow can be erroneous, as we demonstrate in this paper.
+While we accept that Granger Causal influence can be accurately computed (provided measurements are taken suitably; see Section~\ref{sec:previous-criticisms-of-gc}) and can be useful in many situations (see Section~\ref{sec:discussion}), interpreting the direction of Granger Causal influence as the direction of information flow can be erroneous, as we demonstrate in this paper.
 
 \subsection{A short survey of previous criticisms of Granger Causality}
 
 Several objections have been leveled against Granger Causality in the past. We give, here, a short overview of these and describe why our objection is novel, and possibly more fundamental in nature, at least in the context of its usage in neuroscience.
 
-
 \begin{enumerate}
-	\item Granger causality vs. true causality - cite Pearl. Our argument is, in spirit, very similar to the common criticism of Granger causality, which states that GC is a statistical quantity. It does not answer the question of true causal influence: if X is turned off, will Y behave differenty? (Need to quote from Pearl here).However, in the situation we are studying, we ask a different question - we wish to understand whether or not GC gives the correct direction of *information flow*. In our analysis, causal influences are present in both directions.
-	\item Hidden node problem - hard to estimate GC correctly unless you are measuring all the nodes. (measurement problem)
-	\item Noisy measurements can change the direction - cite Friston, cite that economics paper
+	\item First, Granger Causality suffers from what we call the ``hidden node problem''. If two observed nodes receive causal influences from a third, latent node, then a Causal influence may be detected between the observed nodes, even if they are independent of each other~\cite{PearlCausalitychapterasdfads}. All nodes need to be observed, therefore, to avoid finding spurious influences.
+	\item Second, if the measurements from each node are differentially affected by noise, then the predicted direction of causal influence might be opposite to the true direction of influence~\cite{Friston34234, EcoPaper3q4234}. Measurements need to be relatively noiseless and precise in order to obtain the correct direction of causal influece.
+	\item Third, subsampling the processes can produce incorrect results~\cite{KunZhangsPaper}. {\color{red} TODO: Write another line here - look at the paper for this.}
 \end{enumerate}
 
-Note: The technical objections presented above (apart from GC-is-not-true-causality) indicate that estimating GC is hard, because it is hard to measure all nodes, etc. There is some deficiency in the measurement process. If we could measure better (by sampling more nodes, or with lesser noise, or...) then we could get the correct answer. Our objection, on the other hand, is much more fundamental. *Even if* AR coeffs are computed correctly, and the GC metric is perfectly computed (as is the case in our counter-examples), GC would *still* not give the correct direction of information flow. To our knowledge, this is a completely novel argument against GC, and one that is far more severe than previous objections, at least as far as the usage of GC in neuroscience is concerned.
+It is important to note that the technical objections listed above are all concerned with measurement. They indicate that incorrected Granger Causal influences may be computed if there is some deficiency in the measurement process. These objections can be resolved by taking better measurements (by sampling more nodes, with higher signal-to-noise ratio, or {\color{red} by not subsampling}).
 
-Other objections we could add - Kun Zhang's paper (subsampling can cause errors), effective connectivity or plumbing? (venous drainage), 
+Our objection, on the other hand, is much more fundamental. \emph{Even if} the measurements are made with infinite accuracy, and the regression coefficients associated with computing Granger Causality are precisely estimated, and the Granger Causality metric is perfectly computed (as is the case in our counter-examples), Granger Causal influence would \emph{still} not give the correct direction of information flow. To our knowledge, this is a completely novel argument against Granger Causality, and one that is far more serious than previous objections, at least as far as its use in neuroscience is concerned.
 
 \subsection{Our counter-examples and our main result}
 
@@ -326,14 +325,11 @@ Other objections we could add - Kun Zhang's paper (subsampling can cause errors)
 	\item We discover that for reasonable choices of parameter values, the direction of Granger causal influence is opposite to the direction of information flow.
 \end{enumerate}
 
-\subsection{Possible criticisms of this work}
+\subsection{Possible objections to, and shortcomings of this work}
 \begin{enumerate}
+	\item Granger causality vs. true causality - cite Pearl. Our argument is, in spirit, very similar to the common criticism of Granger causality, which states that GC is a statistical quantity. It does not answer the question of true causal influence: if X is turned off, will Y behave differenty? (Need to quote from Pearl here).However, in the situation we are studying, we ask a different question - we wish to understand whether or not GC gives the correct direction of *information flow*. In our analysis, causal influences are present in both directions.
 	\item Circularity - there is no circularity of argument. We are just assuming that there are sufficient number of trials to fully estimate the coefficients of the non-stationary AR process. We describe how this might be achieved in section ... (maybe this should come at the end?)
 	\item Math is not complicated - this is a strength of our analysis. Even simple counter-examples that do not employ difficult proof techniques are able to show that GC does not always correctly estimate the direction of info flow.
-\end{enumerate}
-
-\subsection{Shortcomings in our analysis}
-\begin{enumerate}
 	\item Not evolving source - not a stationary AR process. To circumvent this, we discuss estimation of non-stationary AR coeffs, since this is a neuroscience experiment, so we have many realizations of the same AR process in the form of multiple trials (cite Ding again. Quote if necessary) A future work will address this shortcoming by examining how GC works with an evolving source that produces a stationary process.
 	\item We restrict ourselves to Gaussian noise for simplicity of analysis. Noise in the actual brain is likely to be very different. However, AR processes are often used to model ERPs (need a citation for this).
 	\item In the S\&K algo, we have simplified power and energy constraints
