@@ -266,7 +266,7 @@
 % Abstract --------------------------------------------------------------------
 
 \begin{abstract}
-	Granger causality is an established measure of the ``causal influence'' that one stochastic process has on another. Along with its more recent generalization -- Directed Information -- Granger Causality has been used extensively in neuroscience, and in complex interconnected systems in general, to infer causal influences. Of late, many works have begun to interpret the direction of causal influence as the direction of ``information flow'', which to us appears to be a questionable extrapolation {\color{red}(the question we raise is akin to, but different from, a criticism of Granger Causality that compares it to true causality, as defined by Judea Pearl)}. We test whether these measures correctly predict the direction of information flow by using two simple theoretical experiments, in which the true direction of information flow is known by design. The experiments are based on a communication system with a feedback channel, upon which a strategy inspired by the work of Schalkwijk and Kailath is employed. We show that in these experiments, the direction of information flow can be opposite to that which is inferred using Granger causality and Directed Information. Thus, while it might be reasonable to infer the direction of causal influence using these techniques, one needs to exercise care in interpreting the direction of causal influence as the direction of information flow.
+	Granger causality is an established measure of the ``causal influence'' that one stochastic process has on another. Along with its more recent generalization -- Directed Information -- Granger Causality has been used extensively in neuroscience, and in complex interconnected systems in general, to infer causal influences. Of late, many works have begun to interpret the direction of causal influence as the direction of ``information flow''. We ask: is the direction of causal influence, as predicted by Granger Causality and Directed Information always the same as the direction of information flow? We test whether these measures correctly predict the direction of information flow by using two simple theoretical experiments, in which the true direction of information flow is known by design. The experiments are based on a communication system with a feedback channel, upon which a strategy inspired by the work of Schalkwijk and Kailath is employed. We show that in these experiments, the direction of information flow can be opposite to that which is inferred using Granger causality and Directed Information. Thus, while it might be reasonable to infer the direction of causal influence using these techniques, one needs to exercise care in interpreting the direction of causal influence as the direction of information flow.
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
@@ -333,11 +333,11 @@ Our goal here is to bring out the point that whether Granger causality and Direc
 \subsection{Possible objections to, and shortcomings of this work}
 \label{sec:objections-and-shortcomings}
 
-A review of a previous submission raised some objections to this work, which we seek to clarify here. Further, our analysis has certain shortcomings, which we acknowledge. These could form the basis for future work.
+A review of a submission to a previous conference raised some objections to this work, which we discuss to clarify our perspective. Further, our analysis has certain shortcomings, which we acknowledge. These will form the basis for future work.
 
 \begin{enumerate}
 	\item Firstly, and most importantly, previous work has already shown that presence of a Granger Causal influence does not imply true causation. Judea Pearl classifies Granger Causality as stemming from a ``statistical'' model, rather than from a ``causal'' model~\cite{pearl2009causality-gc-stat}. A potential issue, therefore, might be the question the novelty of this work, given that Pearl's classification could be seen to clear up the misconception. While our argument is, in spirit, very similar to this criticism of Granger causality, in the situation we study, we ask a different question - we wish to understand whether or not Granger Causality gives the correct direction of \emph{information flow}. Further, we give a concrete counter-example in this context, which is very relevant in the modern neuroscience setting.
-	\item It might appear that we make a circular argument while computing the Granger Causal influences in our counter-example, since we supply the model for the stochastic process and use the theoretical coeffiecients of the model directly to compute the Granger Causality metric. However, as we state in Section~\ref{sec:figure-it-out}, we assume that the regression coefficients of the Autoregressive model can be exactly estimated (even if the AR process is non-stationary), and discuss how this might be achieved with the help of multiple trials. {\color{red} (Move to conclusions?)}
+	\item It might appear that we make a circular argument while computing the Granger Causal influences in our counter-example, since we supply the model for the stochastic process and use the theoretical coeffiecients of the model directly to compute the Granger Causality metric. However, as we state in Section~\ref{sec:estimating-ar-coeffs}, we assume that the regression coefficients of the Autoregressive model can be exactly estimated (even if the AR process is non-stationary), and discuss how this might be achieved with the help of multiple trials. {\color{red} (Move to conclusions?)}
 	\item Our analysis does not tackle an information source that evolves with time. Hence, our communication process (inspired from the scheme of Schalkwijk and Kailath~\cite{S&K}) is non-ergodic. Since Granger causality is really just relative errors in prediction of a process, in presence or absence of knowledge of another process, we compute the obvious generalization of Granger causality to non-ergodic processes. Nevertheless, future work will address a situation with a linear dynamical system as the information source.
 	\item Our experiments restrict themselves to Gaussian noise for simplicity, but neural spiking and spike-rate models for spikes tend to be very different from those used here. This is a clear direction for future work.
 	\item The power and energy constraints are somewhat oversimplified to make the analysis simpler. This is for simplicity of exposition. A more general analysis is a trivial extension.
@@ -354,7 +354,7 @@ A review of a previous submission raised some objections to this work, which we 
 
 %Notes:
 
-%You only seem to be assuming that the variance is $\sigma_\theta^2$. Nothing about whether it is a uniform random variable or something derived from quantizing a uniform random variable, or a Gaussian one. 
+%You only seem to be assuming that the variance is $\sigma_\theta^2$. Nothing about whether it is a uniform random variable or something derived from quantizing a uniform random variable, or a Gaussian one.
 
 % --------------------------------------------------------------------------- %
 
@@ -528,6 +528,57 @@ In the reverse direction,
 							 & \qquad \qquad - \frac{1}{2} \log( 2 \pi e \sigma_R^2 ) \bigg)
 \end{align*}
 For a derivation of this, see appendix~\ref{app:dir-info-rev-noisy}.
+
+\subsection{A note on non-stationarity and estimating regression coefficients}
+\label{sec:estimating-ar-coeffs}
+
+The Granger Causality and Directed Inforamtion metrics are a function of the regression coefficients estimated from the data by fitting the models given by equations~\ref{eq:ar-model-x-x} and~\ref{eq:ar-model-x-x-theta}. In our analysis, we described the data-generation model: the algorithm inspired by the Schalkwijk and Kailath scheme for feedback communication. We then proceeded to use the regression coefficients generated by this model directly. This could be construed as erroneous: we ought to simulate the data generation, and compute the regression coefficients from the generated data. This would better model the actions of the neuroscientist who seeks to perform a Granger Causal analysis.
+
+We justify our use of the theoretical regression coefficients as follows: we assume that the regression coefficients can be accurately estimated from data, since neuroscientific experiments typically record the \emph{same} processes multiple times -- these are called ``trials''. The availability of multiple trials of the same process can be leveraged to estimate the regression coefficients accurately, even if the processes are non-stationary.
+
+Suppose we record two non-stationary processes, $\{X_t\}_{t=1}^n$ and $\{Y_t\}_{t=1}^n$, for which we seek to compute the Granger Causality metrics. To this end, we must find coefficients $\alpha_j(t)$ and $\beta_j(t)$ to minimize the error in fitting the models given by equations~\ref{eq:ar-model-x-x} and~\ref{eq:ar-model-x-x-theta}. Note that $\alpha$ and $\beta$ depend on $t$, since we assume the process is non-stationary. However, since we record the \emph{same} process in each trial, the $\alpha_j(t)$ and $\beta_j(t)$ are constant across trials. Estimating them from data that has many trials is then a simple matter of linear regression.
+
+For a given time instant $t$, the $i$\textsuperscript{th} trial is modeled as
+\begin{equation*}
+	X_t^{(i)} = \sum_{j=1}^p \alpha_j(t) X_{t-j}^{(i)} + \epsilon_t^{(i)}
+\end{equation*}
+Note that $\alpha_j(t)$ does not depend on $i$. Collecting variables across $N$ trials, we can write the full model in vector form:
+\begin{align*}
+	\left[ \begin{array}{c}
+			X_t^{(1)} \\
+			X_t^{(2)} \\
+			\vdots \\
+			X_t^{(N)}
+	\end{array} \right]
+	&=
+	\left[ \begin{array}{cccc}
+			X_{t-1}^{(1)} & X_{t-2}^{(1)} & \cdots & X_{t-p}^{(1)} \\
+			X_{t-1}^{(2)} & X_{t-2}^{(2)} & \cdots & X_{t-p}^{(2)} \\
+			\vdots &  & \ddots & \vdots \\
+			X_{t-1}^{(N)} & X_{t-2}^{(N)} & \cdots & X_{t-p}^{(N)} \\
+	\end{array} \right]
+	\left[ \begin{array}{c}
+			\alpha_1(t) \\
+			\alpha_2(t) \\
+			\vdots \\
+			\alpha_p(t)
+	\end{array} \right] \\
+	&\qquad \qquad \qquad +
+	\left[ \begin{array}{c}
+			\epsilon_t^{(1)} \\
+			\epsilon_t^{(2)} \\
+			\vdots \\
+			\epsilon_t^{(N)}
+	\end{array} \right]
+\end{align*}
+
+If we call the vector on the LHS $\bf{Y}$ and the matrix on the RHS $\bf{X}$, then the vector of $\alpha_j(t)$'s ($\bf{\alpha}(t)$) can be estimated at time instant $t$ using Ordinary Least Squares:
+\begin{equation*}
+\hat{\bf{\alpha}}(t) = (\bf{X}^T \bf{X})^{-1} \bf{X}^T \bf{Y}
+\end{equation*}
+This is an unbiased and consistent estimator for $\bf{\alpha}(t)$. This analysis can be trivially extended to the model described by equation~\ref{eq:ar-model-x-x-theta}. With a sufficiently large number of trials, therefore, the regression coefficients can be estimated to arbitrarily high accuracy.
+
+As a final point, we note that estimating the regression coefficients accurately is a form of worst-case analysis. As mentioned at the end of section~\ref{sec:previous-criticisms-of-gc}, we see that \emph{despite} being computed accurately, the metrics of Granger Causality and Directed Information incorrectly estimate the direction of information flow.
 
 % --------------------------------------------------------------------------- %
 
