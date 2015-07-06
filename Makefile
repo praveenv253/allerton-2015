@@ -8,3 +8,6 @@ paper.dvi: paper.tex references.bib
 	bibtex paper.aux
 	latex paper.tex
 	latex paper.tex
+
+clean:
+	rm -rf paper.pdf paper.dvi *.aux *.log *.bbl *.blg
