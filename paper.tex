@@ -300,7 +300,7 @@ In order to determine the direction of causal influence, the Granger Causality m
 
 We note here that Granger's original analysis does not compare this metric on forward and reverse links, however, this appears to be commonly done in practice. {\color{red} TODO: Cite Tsachy's paper here.}
 
-While we accept that Granger Causal influence can be accurately computed (provided measurements are taken suitably; see Section~\ref{sec:previous-criticisms-of-gc}) and can be useful in many situations (see Section~\ref{sec:discussion}), interpreting the direction of Granger Causal influence as the direction of information flow can be erroneous, as we demonstrate in this paper.
+While we accept that Granger Causal influence can be accurately computed (provided measurements are taken suitably; see Section~\ref{sec:previous-criticisms-of-gc}) and can be useful in many situations (see Section~\ref{sec:conclusions}), interpreting the direction of Granger Causal influence as the direction of information flow can be erroneous, as we demonstrate in this paper.
 
 % Intro: Previous criticisms of GC --------------------------------------------
 
@@ -422,7 +422,7 @@ Suppose we try to use the Granger causality measure of directed influence to inf
 
 In order to compute the Granger causality in the reverse direction (from receiver to transmitter), we wish first to compute coefficients $\alpha_j$ such that:
 \begin{equation*}
-	X_i = \sum_{j=1}^{p}{\alpha_j X_{i-j}} + \epsilon_i
+	X_i = \sum_{j=1}^{p}{\alpha_j X_{i-j}} + \epsilon_i \numberthis \label{eq:ar-model-x-x}
 \end{equation*}
 Note that $\alpha_j$ can themselves depend on $i$, since this is a non-stationary process (because the error $\Theta-\widehat{\Theta}_i = X_i$ converges to zero).
 \begin{align*}
@@ -436,7 +436,7 @@ Therefore, $\alpha_1 = \frac{i-2}{i-1}$ and $\epsilon_i = \frac{N_{i-1}}{i-1}$, 
 
 Next, we wish to write $X_i$ in terms of $X_{i-j}$ and $\widehat\Theta_{i-j}$:
 \begin{equation*}
-	X_i = \sum_{j=1}^{p}{\alpha_j X_{i-j}} + \sum_{j=1}^{p}{\beta_j \widehat\Theta_{i-j}} + \tilde\epsilon_i
+	X_i = \sum_{j=1}^{p}{\alpha_j X_{i-j}} + \sum_{j=1}^{p}{\beta_j \widehat\Theta_{i-j}} + \tilde\epsilon_i \numberthis \label{eq:ar-model-x-x-theta}
 \end{equation*}
 which gives
 \begin{align*}
