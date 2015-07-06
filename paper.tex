@@ -265,24 +265,24 @@
 % Abstract --------------------------------------------------------------------
 
 \begin{abstract}
-	Granger causality is an established measure of the ``causal influence'' that one stochastic process has on another. Along with its more recent generalization -- Directed Information -- Granger Causality has been used extensively in neuroscience, and in complex interconnected systems in general, to infer causal influences.     Of late, many works have begun to interpret the direction of causal influence as the direction of ``information flow'' {\color{red}(this is akin to, but different from, a criticism of Granger Causality that compares it to true causality, as defined by Judea Pearl)}. We test whether these measures correctly predict the direction of information flow by using two simple theoretical experiments, in which the true direction of information flow is known by design. The experiments are based on a communication system with a feedback channel, upon which a strategy inspired by the work of Schalkwijk and Kailath is employed. We show that in these experiments, the direction of information flow can be opposite to that which is inferred by using Granger causality and Directed Information. Thus, while it might be reasonable to infer the direction of causal influence using these techniques, one needs to exercise care in interpreting the direction of causal influence as the direction of information flow.
+	Granger causality is an established measure of the ``causal influence'' that one stochastic process has on another. Along with its more recent generalization -- Directed Information -- Granger Causality has been used extensively in neuroscience, and in complex interconnected systems in general, to infer causal influences. Of late, many works have begun to interpret the direction of causal influence as the direction of ``information flow'', which to us appears to be a questionable extrapolation {\color{red}(the question we raise is akin to, but different from, a criticism of Granger Causality that compares it to true causality, as defined by Judea Pearl)}. We test whether these measures correctly predict the direction of information flow by using two simple theoretical experiments, in which the true direction of information flow is known by design. The experiments are based on a communication system with a feedback channel, upon which a strategy inspired by the work of Schalkwijk and Kailath is employed. We show that in these experiments, the direction of information flow can be opposite to that which is inferred using Granger causality and Directed Information. Thus, while it might be reasonable to infer the direction of causal influence using these techniques, one needs to exercise care in interpreting the direction of causal influence as the direction of information flow.
 \end{abstract}
+
 \IEEEpeerreviewmaketitle
 
-
+% Introduction ----------------------------------------------------------------
 
 \section{Introduction}
 \label{sec:intro}
 
-\subsection{Motivation}
+% Intro: Motivation -----------------------------------------------------------
 
-\begin{enumerate}
-	\item Increased interest in understanding (a) functional connectivity maps and (b) computational networks of the brain.
-	\item Evidenced by funding - Brain Initiative, Human Brain project.
-	\item Quote one of the missions of the Brain Initiative - esp. for connectivity maps, but also for computation
-	\item Quote papers that try to understand how *information flows* in the brain. (past references from the ISIT paper - look for some more).
-	\item Last line: "The question we raise is - Do these directed connectivity maps, as determined by directional causal influence measures such as Granger causality, correctly identify the directions along which information flows in the brain?"
-\end{enumerate}
+\subsection{Motivation}
+\label{subsec:motivation}
+
+This work is in large part motivated by a recent surge of interest in understanding neural circuits --- the connectivity and dynamic activity of parts of the brain --- and how they give rise to behavior and experience. This is evidenced in the launching of the BRAIN initiative in the US and the Human Brain Project in Europe. To quote from \emph{BRAIN 2025: A Scientific Vision}\footnote{The BRAIN Working Group's report to the Advisory Committee to the Director of the NIH}, we wish to ``map connected neurons in local circuits and distributed brain systems, enabling an understanding of the relationship between neuronal structure and function'', clearly indicating the move towards understanding (a) the connectivity and (b) the computational function of different brain regions. While the question of how the brain computes has been of immense interest for several decades, only recently have measurement techniques become sophisticated enough to be able to simultaneously record the activity of multiple neurons, or multiple neural populations.
+
+In an effort to make headway on these goals, several works use Granger causality (and less often, its information-theoretic generalization -- Directed Information) to understand how information flows in the brain ({\color{red} ??}), or to acquire directed maps of functional connectivity ({\color{red} ??}). For instance, in~\cite{Brovelli2004BetaOscillations}, Granger causal influences that are measured between somatosensory and motor sites are said to ``support the idea that somatosensory feedback provides information to the sensorimotor system that is used to control motor output''. This raises the question: do these directed connectivity maps, as determined by directional causal influence measures such as Granger causality, correctly identify the directions along which information flows in the brain?
 
 \subsection{How Granger Causality is used in Neuroscience today}
 
