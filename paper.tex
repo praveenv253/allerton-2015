@@ -1,4 +1,5 @@
 \documentclass[conference]{IEEEtran}
+%\documentclass[conference,draftcls]{IEEEtran}
 
 
 
@@ -278,7 +279,7 @@
 % Intro: Motivation -----------------------------------------------------------
 
 \subsection{Motivation}
-\label{subsec:motivation}
+\label{sec:motivation}
 
 This work is in large part motivated by a recent surge of interest in understanding neural circuits --- the connectivity and dynamic activity of parts of the brain --- and how they give rise to behavior and experience. This is evidenced in the launching of the BRAIN initiative in the US and the Human Brain Project in Europe. To quote from \emph{BRAIN 2025: A Scientific Vision}\footnote{The BRAIN Working Group's report to the Advisory Committee to the Director of the NIH}, we wish to ``map connected neurons in local circuits and distributed brain systems, enabling an understanding of the relationship between neuronal structure and function'', clearly indicating the move towards understanding (a) the connectivity and (b) the computational function of different brain regions. While the question of how the brain computes has been of immense interest for several decades, only recently have measurement techniques become sophisticated enough to be able to simultaneously record the activity of multiple neurons, or multiple neural populations.
 
@@ -286,15 +287,32 @@ In an effort to make headway on these goals, several works use Granger causality
 
 \subsection{How Granger Causality is used in Neuroscience today}
 
+We take~\cite{Brovelli2004BetaOscillations} and~\cite{Ding1999ShortWindow} to be the canonical references for the application of Granger causality to estimate causal influences, as they seem to be widely accepted by the community (\cite{Bressler2011WienerGranger},{\color{red} \cite{Roebroeck2005MappingDirected}},~\cite{Ding2006GrangerCausality}, \cite{Barnett2014MVGC}). Here, we briefly describe how Granger Causal influence is quantified, and how it is computed in these works.
+
+Granger causality, as originally described by Granger~\cite{Granger1969InvestigatingCausal}, measures the level of influence that one process $\{X\}$ has on another process $\{Y\}$. The analysis compares the \textit{error in predicting} the $\{Y\}$ process based on (i) simply the past of $\{Y\}$, and (ii) based on the past of both $\{X\}$ and $\{Y\}$. The Granger causality metric is the ratio of these errors. Many variations of Granger causality have also been considered, including a generalization --- the Directed Information (see~\cite{MasseyCausality,quinn,weissman}) --- an information-theoretic quantity denoted by $I(\m{X}\to\m{Y})$.
+
+Granger causality computation, in general, requires that the processes in consideration be stationary. In neuroscientific experiments, this is usually not the case, as the express objective of the experiment is to understand brain function while the brain is subjected to a task. In order to circumvent this problem, data analysis techniques either assume stationarity~\cite{Brovelli2004BetaOscillations}, or work with time-windows short enough that the processes are in fact stationary within those windows~\cite{Ding2006GrangerCausality}. In the latter case, Granger causal influences are computed for each window individually, in order to produce a dynamic description of brain connectivity as the brain carries out the said task.
+
+In order to determine the direction of causal influence, the Granger Causality metric (ratio of residual variances) from $\{X\}$ to $\{Y\}$ is \emph{compared} to that from $\{Y\}$ to $\{X\}$. We note here that Granger's original analysis does not compare this metric on forward and reverse links, however, this appears to be commonly done in practice. {\color{red} TODO: Cite Tsachy's paper here.}
+
+While we accept that Granger Causal influence can be accurately computed (provided measurements are taken suitably~\ref{sec:previous-criticisms-of-gc}) and can be useful in many situations~\ref{sec:discussion}, interpreting the direction of Granger Causal influence as the direction of information flow can be erroneous, as we demonstrate in this paper.
+
+\subsection{A short survey of previous criticisms of Granger Causality}
+
+Several objections have been leveled against Granger Causality in the past. We give, here, a short overview of these and describe why our objection is novel, and possibly more fundamental in nature, at least in the context of its usage in neuroscience.
+
+
 \begin{enumerate}
-	\item We take Brovelli et.\ al.\ and Ding et.\ al.\ as the basis / canonical reference, as this appears to be generally accepted by the community (Cite review papers that cite these two papers; cite Anil Seth's MVGC package paper).
-	\item Explain Granger causality
-	\item Explain the exact method used - including trials, pre-processing steps, etc.\ - as described in the Bressler paper.
-	\item Granger's original analysis does not compare GC on forward and reverse links, however, this appears to be the commonly done in practice (cite Brovelli and review papers if possible)
-	\item State our problem statement again - we take issue not with any of these steps, but with the interpretation that if greater Granger causal influences are seen to be from X to Y, then information must be flowing from X to Y in the brain.
+	\item Granger causality vs. true causality - cite Pearl. Our argument is, in spirit, very similar to the common criticism of Granger causality, which states that GC is a statistical quantity. It does not answer the question of true causal influence: if X is turned off, will Y behave differenty? (Need to quote from Pearl here).However, in the situation we are studying, we ask a different question - we wish to understand whether or not GC gives the correct direction of *information flow*. In our analysis, causal influences are present in both directions.
+	\item Hidden node problem - hard to estimate GC correctly unless you are measuring all the nodes. (measurement problem)
+	\item Noisy measurements can change the direction - cite Friston, cite that economics paper
 \end{enumerate}
 
-\subsection{Our counter-examples and main result}
+Note: The technical objections presented above (apart from GC-is-not-true-causality) indicate that estimating GC is hard, because it is hard to measure all nodes, etc. There is some deficiency in the measurement process. If we could measure better (by sampling more nodes, or with lesser noise, or...) then we could get the correct answer. Our objection, on the other hand, is much more fundamental. *Even if* AR coeffs are computed correctly, and the GC metric is perfectly computed (as is the case in our counter-examples), GC would *still* not give the correct direction of information flow. To our knowledge, this is a completely novel argument against GC, and one that is far more severe than previous objections, at least as far as the usage of GC in neuroscience is concerned.
+
+Other objections we could add - Kun Zhang's paper (subsampling can cause errors), effective connectivity or plumbing? (venous drainage), 
+
+\subsection{Our counter-examples and our main result}
 
 \begin{enumerate}
 	\item Define Granger causal influence and directed info in English again. Define information flow (use examples, or define formally? Formal definition should come in the math sections). Describe the problem again - is the direction of causal influence the same as the direction of information flow?
@@ -307,18 +325,6 @@ In an effort to make headway on these goals, several works use Granger causality
 		\end{enumerate}
 	\item We discover that for reasonable choices of parameter values, the direction of Granger causal influence is opposite to the direction of information flow.
 \end{enumerate}
-
-\subsection{Survey of previous criticisms of Granger Causality}
-
-\begin{enumerate}
-	\item Granger causality vs. true causality - cite Pearl. Our argument is, in spirit, very similar to the common criticism of Granger causality, which states that GC is a statistical quantity. It does not answer the question of true causal influence: if X is turned off, will Y behave differenty? (Need to quote from Pearl here).However, in the situation we are studying, we ask a different question - we wish to understand whether or not GC gives the correct direction of *information flow*. In our analysis, causal influences are present in both directions.
-	\item Hidden node problem - hard to estimate GC correctly unless you are measuring all the nodes. (measurement problem)
-	\item Noisy measurements can change the direction - cite Friston, cite that economics paper
-\end{enumerate}
-
-Note: The technical objections presented above (apart from GC-is-not-true-causality) indicate that estimating GC is hard, because it is hard to measure all nodes, etc. There is some deficiency in the measurement process. If we could measure better (by sampling more nodes, or with lesser noise, or...) then we could get the correct answer. Our objection, on the other hand, is much more fundamental. *Even if* AR coeffs are computed correctly, and the GC metric is perfectly computed (as is the case in our counter-examples), GC would *still* not give the correct direction of information flow. To our knowledge, this is a completely novel argument against GC, and one that is far more severe than previous objections, at least as far as the usage of GC in neuroscience is concerned.
-
-Other objections we could add - Kun Zhang's paper (subsampling can cause errors), effective connectivity or plumbing? (venous drainage), 
 
 \subsection{Possible criticisms of this work}
 \begin{enumerate}
