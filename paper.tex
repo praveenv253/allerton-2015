@@ -1,266 +1,28 @@
 \documentclass[letterpaper, 10pt, conference]{ieeeconf}
-%\documentclass[conference,draftcls]{IEEEtran}
 
 \overrideIEEEmargins
 
-% *** CITATION PACKAGES ***
-%
-%\usepackage{cite}
-% cite.sty was written by Donald Arseneau
-% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
-% \cite{} output to follow that of IEEE. Loading the cite package will
-% result in citation numbers being automatically sorted and properly
-% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
-% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
-% \cite will automatically add leading space, if needed. Use cite.sty's
-% noadjust option (cite.sty V3.8 and later) if you want to turn this off.
-% cite.sty is already installed on most LaTeX systems. Be sure and use
-% version 4.0 (2003-05-27) and later if using hyperref.sty. cite.sty does
-% not currently provide for hyperlinked citations.
-% The latest version can be obtained at:
-% http://www.ctan.org/tex-archive/macros/latex/contrib/cite/
-% The documentation is contained in the cite.sty file itself.
-
-
-
-
-
-
-% *** GRAPHICS RELATED PACKAGES ***
-%
-%\ifCLASSINFOpdf
-  %\usepackage[pdftex]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
-%\else
-  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
-  % will default to the driver specified in the system graphics.cfg if no
-  % driver is specified.
-  \usepackage[dvips]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../eps/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  \DeclareGraphicsExtensions{.eps}
-%\fi
-% graphicx was written by David Carlisle and Sebastian Rahtz. It is
-% required if you want graphics, photos, etc. graphicx.sty is already
-% installed on most LaTeX systems. The latest version and documentation can
-% be obtained at: 
-% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
-% Another good source of documentation is "Using Imported Graphics in
-% LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
-% epslatex.pdf at: http://www.ctan.org/tex-archive/info/
-%
-% latex, and pdflatex in dvi mode, support graphics in encapsulated
-% postscript (.eps) format. pdflatex in pdf mode supports graphics
-% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
-% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
-% not a bitmapped formats (.jpeg, .png). IEEE frowns on bitmapped formats
-% which can result in "jaggedy"/blurry rendering of lines and letters as
-% well as large increases in file sizes.
-%
-% You can find documentation about the pdfTeX application at:
-% http://www.tug.org/applications/pdftex
-
-
+\usepackage[dvips]{graphicx}
+\DeclareGraphicsExtensions{.eps}
 
 \setlength{\parskip}{0.05cm}
 
-
-
 % *** MATH PACKAGES ***
-%
 \usepackage[cmex10]{amsmath}
 \usepackage{amssymb}
-% A popular package from the American Mathematical Society that provides
-% many useful and powerful commands for dealing with mathematics. If using
-% it, be sure to load this package with the cmex10 option to ensure that
-% only type 1 fonts will utilized at all point sizes. Without this option,
-% it is possible that some math symbols, particularly those within
-% footnotes, will be rendered in bitmap form which will result in a
-% document that can not be IEEE Xplore compliant!
-%
-% Also, note that the amsmath package sets \interdisplaylinepenalty to 10000
-% thus preventing page breaks from occurring within multiline equations. Use:
 \interdisplaylinepenalty=2500
-% after loading amsmath to restore such page breaks as IEEEtran.cls normally
-% does. amsmath.sty is already installed on most LaTeX systems. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
 
 \usepackage{color}
 
-
-
-% *** SPECIALIZED LIST PACKAGES ***
-%
-%\usepackage{algorithmic}
-% algorithmic.sty was written by Peter Williams and Rogerio Brito.
-% This package provides an algorithmic environment fo describing algorithms.
-% You can use the algorithmic environment in-text or within a figure
-% environment to provide for a floating algorithm. Do NOT use the algorithm
-% floating environment provided by algorithm.sty (by the same authors) or
-% algorithm2e.sty (by Christophe Fiorio) as IEEE does not use dedicated
-% algorithm float types and packages that provide these will not provide
-% correct IEEE style captions. The latest version and documentation of
-% algorithmic.sty can be obtained at:
-% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithms/
-% There is also a support site at:
-% http://algorithms.berlios.de/index.html
-% Also of interest may be the (relatively newer and more customizable)
-% algorithmicx.sty package by Szasz Janos:
-% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
-
-
-
-
-% *** ALIGNMENT PACKAGES ***
-%
-%\usepackage{array}
-% Frank Mittelbach's and David Carlisle's array.sty patches and improves
-% the standard LaTeX2e array and tabular environments to provide better
-% appearance and additional user controls. As the default LaTeX2e table
-% generation code is lacking to the point of almost being broken with
-% respect to the quality of the end results, all users are strongly
-% advised to use an enhanced (at the very least that provided by array.sty)
-% set of table tools. array.sty is already installed on most systems. The
-% latest version and documentation can be obtained at:
-% http://www.ctan.org/tex-archive/macros/latex/required/tools/
-
-
-%\usepackage{mdwmath}
-%\usepackage{mdwtab}
-% Also highly recommended is Mark Wooding's extremely powerful MDW tools,
-% especially mdwmath.sty and mdwtab.sty which are used to format equations
-% and tables, respectively. The MDWtools set is already installed on most
-% LaTeX systems. The lastest version and documentation is available at:
-% http://www.ctan.org/tex-archive/macros/latex/contrib/mdwtools/
-
-
-% IEEEtran contains the IEEEeqnarray family of commands that can be used to
-% generate multiline equations as well as matrices, tables, etc., of high
-% quality.
-
-
-%\usepackage{eqparbox}
-% Also of notable interest is Scott Pakin's eqparbox package for creating
-% (automatically sized) equal width boxes - aka "natural width parboxes".
-% Available at:
-% http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
-
-
-
-
-
-% *** SUBFIGURE PACKAGES ***
-%\usepackage[tight,footnotesize]{subfigure}
-% subfigure.sty was written by Steven Douglas Cochran. This package makes it
-% easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
-% work, it is a good idea to load it with the tight package option to reduce
-% the amount of white space around the subfigures. subfigure.sty is already
-% installed on most LaTeX systems. The latest version and documentation can
-% be obtained at:
-% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
-% subfigure.sty has been superceeded by subfig.sty.
-
-
-
-%\usepackage[caption=false]{caption}
-%\usepackage[font=footnotesize]{subfig}
-% subfig.sty, also written by Steven Douglas Cochran, is the modern
-% replacement for subfigure.sty. However, subfig.sty requires and
-% automatically loads Axel Sommerfeldt's caption.sty which will override
-% IEEEtran.cls handling of captions and this will result in nonIEEE style
-% figure/table captions. To prevent this problem, be sure and preload
-% caption.sty with its "caption=false" package option. This is will preserve
-% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
-% (recommended due to many improvements over 1.2) of subfig.sty supports
-% the caption=false option directly:
-%\usepackage[caption=false,font=footnotesize]{subfig}
-%
-% The latest version and documentation can be obtained at:
-% http://www.ctan.org/tex-archive/macros/latex/contrib/subfig/
-% The latest version and documentation of caption.sty can be obtained at:
-% http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
-
-
-
-
-% *** FLOAT PACKAGES ***
-%
-%\usepackage{fixltx2e}
-% fixltx2e, the successor to the earlier fix2col.sty, was written by
-% Frank Mittelbach and David Carlisle. This package corrects a few problems
-% in the LaTeX2e kernel, the most notable of which is that in current
-% LaTeX2e releases, the ordering of single and double column floats is not
-% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
-% single column figure to be placed prior to an earlier double column
-% figure. The latest version and documentation can be found at:
-% http://www.ctan.org/tex-archive/macros/latex/base/
-
-
-
-%\usepackage{stfloats}
-% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
-% the ability to do double column floats at the bottom of the page as well
-% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
-% LaTeX2e). It also provides a command:
-%\fnbelowfloat
-% to enable the placement of footnotes below bottom floats (the standard
-% LaTeX2e kernel puts them above bottom floats). This is an invasive package
-% which rewrites many portions of the LaTeX2e float routines. It may not work
-% with other packages that modify the LaTeX2e float routines. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
-% Documentation is contained in the stfloats.sty comments as well as in the
-% presfull.pdf file. Do not use the stfloats baselinefloat ability as IEEE
-% does not allow \baselineskip to stretch. Authors submitting work to the
-% IEEE should note that IEEE rarely uses double column equations and
-% that authors should try to avoid such use. Do not be tempted to use the
-% cuted.sty or midfloat.sty packages (also by Sigitas Tolusis) as IEEE does
-% not format its papers in such ways.
-
-
-
-
-
-% *** PDF, URL AND HYPERLINK PACKAGES ***
-%
-%\usepackage{url}
-% url.sty was written by Donald Arseneau. It provides better support for
-% handling and breaking URLs. url.sty is already installed on most LaTeX
-% systems. The latest version can be obtained at:
-% http://www.ctan.org/tex-archive/macros/latex/contrib/misc/
-% Read the url.sty source comments for usage information. Basically,
-% \url{my_url_here}.
-
-
-
-% *** Do not adjust lengths that control margins, column widths, etc. ***
-% *** Do not use packages that alter fonts (such as pslatex).         ***
-% There should be no need to do such things with IEEEtran.cls V1.6 and later.
-% (Unless specifically asked to do so by the journal or conference you plan
-% to submit to, of course. )
-
-
-% correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 \newcommand\numberthis{\stepcounter{equation}\tag{\theequation}}
 \newcommand{\m}[1]{\mathbf{#1}^m}
 
 \begin{document}
-%
-% paper title
-% can use linebreaks \\ within to get better formatting as desired
 \title{Is the direction of Granger causal influence the same as the direction of information flow?}
 \author{Praveen Venkatesh and Pulkit Grover\\Carnegie Mellon University}
 
-% make the title area
 \maketitle
 
 % Abstract --------------------------------------------------------------------
@@ -349,7 +111,7 @@ A review of a submission to a previous conference raised some objections to this
 %Notes:
 %You only seem to be assuming that the variance is $\sigma_\theta^2$. Nothing about whether it is a uniform random variable or something derived from quantizing a uniform random variable, or a Gaussian one.
 
-% --------------------------------------------------------------------------- %
+% Schalkwijk and Kailath scheme description -----------------------------------
 
 \section{A simple feedback communication scheme}
 \label{sec:sk}
@@ -357,6 +119,8 @@ This section summarizes the analysis in the work of Schalkwijk and Kailath~\cite
 
 The transmitter wants to convey a single zero-mean random number, $\Theta$, having variance
 $\sigma_\theta^2$, to the receiver. $\Theta$ could be obtained, for instance, by quantizing a bounded interval on the real line (e.g. $[-1,1]$), as is done in the scheme of Schalkwijk and Kailath~\cite{S&K}. The forward channel is an AWGN channel with noise variance $\sigma_N^2$. We will use simple linear communication strategies for a noiseless feedback channel, as well as an AWGN feedback channel with noise variance $\sigma_R^2$. In both cases, the estimators will be shown to be unbiased and consistent (the error mean is zero, and the error variance converges to zero).
+
+% S&K: Noiseless feedback -----------------------------------------------------
 
 \subsection{Noiseless feedback: the Schalkwijk-Kailath strategy}
  In the first step, the transmitter sends\footnote{We assume that the power constraints are such that the scaling constant $\alpha$ in~\cite{S&K} is $1$.} $X_1 = \Theta$, which the receiver receives with added noise. The receiver sends back an estimate of $\Theta$ over the feedback link. In all subsequent iterations, the transmitter sends the receiver the error in its latest estimate.
@@ -379,6 +143,8 @@ Through this scheme, the estimate $\widehat{\Theta}_{i}$ is seen to converge to 
 	\mathbb{E}[(\widehat{\Theta}_{i}-\Theta)^{2}] &= \mathbb{E}\bigg[\bigg(\frac{1}{i}\sum_{j=1}^{i}N_{j}\bigg)^{2}\bigg] \\
 												  &= \frac{1}{i^{2}}\mathbb{E}\bigg[\bigg(\sum_{j=1}^{i}N_{j}\bigg)^{2}\bigg] = \frac{i}{i^{2}}\mathbb{E}[N_{1}^{2}] = \frac{\sigma_{N}^{2}}{i}\overset{i\to\infty}\longrightarrow 0.
 \end{align*}
+
+% S&K: Noisy feedback ---------------------------------------------------------
 
 \subsection{Noisy feedback}
 In the presence of noise in the feedback link, restricting our attention to linear strategies, we can use a simple modification of the Schalkwijk-Kailath strategy, incorporating the feedback\footnote{We note that implicitly, this strategy assumes an energy/SNR constraint on the feedback link. This is because the receiver simply sends back the estimate, which is shown to converge to the true value of $\Theta$.}. The receiver still simply transmits the estimate $\widehat{\Theta}_i$ based on the $i$-th forward channel output $Y_i=X_i+N_i$. The transmitter now receives corrupted versions $Z_i=\widehat\Theta_{i-1} + R_{i-1}$ of the receiver's transmissions. That is,
@@ -406,8 +172,12 @@ We also derive here an expression for $X_i$, which we will use later.
 	&= \frac{1}{i-1} \sum_{k=1}^{i-2} R_k - \frac{1}{i-1} \sum_{k=1}^{i-1} N_k - R_{i} \numberthis \label{eq:x_i-noisy}
 \end{align*}
 
+% Computing GC and Directed Information ---------------------------------------
+
 \section{Granger causality and directed information analyses for the strategies in Section~\ref{sec:sk}}
 \label{sec:analytical-results}
+
+% Computing GC: Noiseless feedback --------------------------------------------
 
 \subsection{Granger causality for the noiseless feedback case}
 \label{sec:gc-noiseless}
@@ -461,6 +231,8 @@ so that $\text{Var}(\tilde\epsilon_i) = \sigma_N^2/i^2$. The Granger causality r
 
 The intuitive argument for why this is happening might go as follows: since the feedback link is noiseless, you can always perfectly predict the transmitted symbol from the $\widehat\Theta$'s and the history of $X$. On the other hand, you can never perfectly predict $\widehat\Theta_i$ from the $X$'s and the history of $\widehat\Theta$.
 
+% Computing Directed Information: Noiseless feedback --------------------------
+
 \subsection{Directed Information for the noiseless feedback case}
 \label{sec:dir-info-noiseless}
 
@@ -501,6 +273,8 @@ where for (a) we have expressed $\Theta$ in terms of $\widehat\Theta_{i-1}$ and 
 \end{align*}
 as expected.
 
+% Computing Directed Information: noisy feedback ------------------------------
+
 \subsection{Directed Information for the noisy feedback scenario}
 
 Since a noiseless feedback link is not realistic, we proceed to perform the same Directed Information calculations as above for the feedback link with additive white Gaussian noise of variance $\sigma_R^2$. While we could not derive simple closed form expressions for the Directed Information in the forward and reverse links, we were able to evaluate the expressions numerically. These are plotted in section~\ref{sec:numerical-results}.
@@ -524,7 +298,9 @@ In the reverse direction,
 \end{align*}
 For a derivation of this, see appendix~\ref{app:dir-info-rev-noisy}.
 
-\subsection{A note on non-stationarity and estimating regression coefficients}
+% Computing GC and DI: Estimating regression coefficients ---------------------
+
+\subsection{A note on estimating regression coefficients}
 \label{sec:estimating-ar-coeffs}
 
 The Granger Causality and Directed Information metrics are a function of the regression coefficients estimated from the data by fitting the models given by equations~\ref{eq:ar-model-x-x} and~\ref{eq:ar-model-x-x-theta}. In our analysis, we described the data-generation model: the algorithm inspired by the Schalkwijk and Kailath scheme for feedback communication. We then proceeded to use the regression coefficients generated by this model directly. This could be construed as erroneous: we ought to simulate the data generation, and compute the regression coefficients from the generated data. This would better model the actions of the neuroscientist who seeks to perform a Granger Causal analysis.
@@ -575,7 +351,7 @@ This is an unbiased and consistent estimator for $\bf{\alpha}(t)$. This analysis
 
 As a final point, we note that estimating the regression coefficients accurately is a form of worst-case analysis. As mentioned at the end of section~\ref{sec:previous-criticisms-of-gc}, we see that \emph{despite} being computed accurately, the metrics of Granger Causality and Directed Information incorrectly estimate the direction of information flow.
 
-% --------------------------------------------------------------------------- %
+% Numerical results -----------------------------------------------------------
 
 \section{Numerical results demonstrating that Granger Causal influence can be opposite in direction to information flow}
 \label{sec:numerical-results}
@@ -590,6 +366,8 @@ In the noiseless feedback case, the directed information on the forward link is 
 		     \label{fig:numerical}
 \end{figure}
 
+% Conclusions and discussions -------------------------------------------------
+
 \section{Conclusions and discussions}
 \label{sec:conclusions}
 
@@ -597,7 +375,7 @@ We demonstrate, by means of a concrete counter-example, that the direction predi
 
 It might appear that we make a circular argument while computing the Granger Causal influences in our counter-example, since we supply the model for the stochastic process and use the system parameters of the model directly to compute the Granger Causality metric. However, as we state in Section~\ref{sec:estimating-ar-coeffs}, we assume that the regression coefficients of the Autoregressive model can be exactly estimated (even if the AR process is non-stationary), and discuss how this might be achieved with the help of multiple trials.
 
-As a final remark, we emphasize that this work only demonstrates the error in \emph{interpreting} the direction of causal influence as the direction of \emph{information flow}. We do \emph{not} seek to invalidate much of the neuroscientific work that has been done in this direction; we merely caution against making {\color{red} (what might be construed as hopeful)} extrapolations from causal influences as to the manner in which information flows.
+As a final remark, we emphasize that this work only demonstrates the error in \emph{interpreting} the direction of causal influence as the direction of \emph{information flow}. We do \emph{not} seek to invalidate much of the neuroscientific work that has been done in this direction; we merely caution against making (what might be construed as hopeful) extrapolations from causal influences as to the manner in which information flows.
 
 We do not seek to understate the importance of determining causal influences in the brain; understanding causal influence itself may have a great deal of benefit. For instance, we might seek to understand the spread of activity in the brain during an epileptic siezure -- in such applications, we are not concerned with how information is being transferred through the neural circuitry; we only seek to determine the source of the activity for the purpose of surgical intervention.
 
@@ -605,6 +383,8 @@ We do not seek to understate the importance of determining causal influences in 
 
 % TODO: Include in final version:
 % Some of this misconception might have arisen because of Massey's directed info conservation - we expect that dir info in the forward dirn goes up if the other one goes down - but this is a misnomer. (Do we still need this? I am increasingly of the opinion that directed info / GC capture nothing about the message)
+
+% Acknowledgements ------------------------------------------------------------
 
 \section*{Acknowledgments}
 
