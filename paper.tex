@@ -115,6 +115,14 @@ A review of a submission to a previous conference raised some objections to this
 
 \section{A simple feedback communication scheme}
 \label{sec:sk}
+
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+	\centering
+	\includegraphics[width=3.2in]{sk-block-diagram}
+	\caption{A block-diagram representation of the communication system, describing the feedback channels and supplying notation for the variables used throughout the paper.}
+	\label{fig:sk-block-diagram}
+\end{figure}
+
 This section summarizes the analysis in the work of Schalkwijk and Kailath~\cite{S&K}, and a simple (and previously known) extension to a noisy feedback case. It also establishes the model and the notation used in the paper.
 
 The transmitter wants to convey a single zero-mean random number, $\Theta$, having variance
@@ -182,7 +190,7 @@ We also derive here an expression for $X_i$, which we will use later.
 \subsection{Granger causality for the noiseless feedback case}
 \label{sec:gc-noiseless}
 
-Suppose we try to use the Granger causality measure of directed influence to infer the direction of information flow. As discussed in Section~\ref{sec:intro}, one might expect the direction of information flow --- and hence the direction of greater Granger causality --- to be from the transmitter to the receiver.
+Suppose we try to use the Granger causality measure of directed influence to infer the direction of information flow. As discussed in Section~\ref{sec:intro}, one might expect the direction of information flow -- and hence the direction of greater Granger causality -- to be from the transmitter to the receiver.
 
 In order to compute the Granger causality in the reverse direction (from receiver to transmitter), we wish first to compute coefficients $\alpha_j$ such that:
 \begin{equation*}
