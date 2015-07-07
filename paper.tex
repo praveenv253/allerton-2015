@@ -257,8 +257,9 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{Some thought experiments on the applicability of Granger causality and Directed Information in inferring direction of information flows}
-\author{Praveen Venkatesh and Pulkit Grover\\Carnegie Mellon University}
+\title{Is the direction of Granger causal influence the same as the direction of information flow?}
+\author{Praveen Venkatesh\\vpraveen@cmu.edu\\Carnegie Mellon University}
+\author{Pulkit Grover\\pulkit@cmu.edu\\Carnegie Mellon University}
 
 % make the title area
 \maketitle
@@ -266,7 +267,7 @@
 % Abstract --------------------------------------------------------------------
 
 \begin{abstract}
-	Granger causality is an established measure of the ``causal influence'' that one stochastic process has on another. Along with its more recent generalization -- Directed Information -- Granger Causality has been used extensively in neuroscience, and in complex interconnected systems in general, to infer causal influences. Of late, many works have begun to interpret the direction of causal influence as the direction of ``information flow''. We ask: is the direction of causal influence, as predicted by Granger Causality and Directed Information always the same as the direction of information flow? We test whether these measures correctly predict the direction of information flow by using two simple theoretical experiments, in which the true direction of information flow is known by design. The experiments are based on a communication system with a feedback channel, upon which a strategy inspired by the work of Schalkwijk and Kailath is employed. We show that in these experiments, the direction of information flow can be opposite to that which is inferred using Granger causality and Directed Information. Thus, while it might be reasonable to infer the direction of causal influence using these techniques, one needs to exercise care in interpreting the direction of causal influence as the direction of information flow.
+	Granger causality is an established measure of the ``causal influence'' that one stochastic process has on another. Along with its more recent generalization -- Directed Information -- Granger Causality has been used extensively in neuroscience, and in complex interconnected systems in general, to infer causal influences. Of late, many works have begun to interpret the direction of causal influence as the direction of ``information flow''. We ask: is the direction of causal influence, as predicted by Granger Causality and Directed Information always the same as the direction of information flow? We test whether these measures correctly predict the direction of information flow by using two simple theoretical experiments, in which the true direction of information flow (the ``ground truth'') is known by design. The experiments are based on a communication system with a feedback channel, upon which a strategy inspired by the work of Schalkwijk and Kailath is employed. We show that in these experiments, the direction of information flow can be opposite to that which is inferred using Granger causality and Directed Information. Thus, while it might be reasonable to infer the direction of causal influence using these techniques, one needs to exercise care in interpreting the direction of causal influence as the direction of information flow.
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
@@ -298,7 +299,7 @@ The computation of Granger causality, in general, requires that the processes un
 
 In order to determine the direction of causal influence, the Granger Causality metric (ratio of residual variances) from $\{X\}$ to $\{Y\}$ is \emph{compared} to that from $\{Y\}$ to $\{X\}$. The direction of causal influence is taken to be the direction with a greater Granger Causality metric. Further, this direction of causal influence is interpreted to be the direction of informationf flow -- the interpretation we question in this paper. We also note that many of these works use a spectral version of Granger Causality, that supplies this metric as a function of frequency. It then becomes possible to also determine the brain wave frequency at which these influences occur. However, we restrict our analysis to the simpler non-spectral version of Granger Causality, since it is sufficient to for the purpose of our arguments.
 
-We note here that Granger's original analysis does not compare this metric on forward and reverse links, however, this appears to be commonly done in practice. {\color{red} TODO: Cite Tsachy's paper here.}
+We note here that Granger's original analysis does not compare this metric on forward and reverse links, however, this is commonly done in practice even in areas beyond neuroscience (eg.~\cite{Brovelli2004BetaOscillations,jiao2013universal}).
 
 While we accept that Granger Causal influence can be accurately computed (provided measurements are taken suitably; see Section~\ref{sec:previous-criticisms-of-gc}) and can be useful in many situations (see Section~\ref{sec:conclusions}), interpreting the direction of Granger Causal influence as the direction of information flow can be erroneous, as we demonstrate in this paper.
 
@@ -315,9 +316,9 @@ Several objections have been leveled against Granger Causality in the past. We g
 	\item Third, subsampling the processes can produce misleading Granger Causal relations~\cite{gong2015discovering}. Performing Granger Causal analysis on subsampled time series can lead one to miss the causal influence. If pre-processing involves subsampling, then this should be done with care.
 \end{enumerate}
 
-It is important to note that the technical objections listed above are all concerned with \emph{measurement}. They indicate that incorrect Granger Causal influences may be computed if there is some deficiency in the measurement procedure. These objections can be resolved by taking better measurements (by sampling more nodes, with higher signal-to-noise ratio, etc.).
+It is important to note that the technical objections listed above are all deficiencies in or limitations of \emph{measurement}. They indicate that incorrect Granger Causal influences may be computed if there is some deficiency or limitation in the measurement procedure. These objections can be resolved by taking better measurements (by sampling more nodes, with higher signal-to-noise ratio, etc.).
 
-Our objection, on the other hand, is much more fundamental. \emph{Even if} the measurements are made with infinite accuracy, and the regression coefficients associated with computing Granger Causality are precisely estimated, and the Granger Causality metric is perfectly computed (as is the case in our counter-examples), Granger Causal influence would \emph{still} not give the correct direction of information flow. To our knowledge, this is a completely novel argument against Granger Causality, and one that is far more serious than previous objections, at least as far as its usefulness in understanding brain function is concerned.
+Our objection, on the other hand, is more fundamental. \emph{Even if} the measurements are made with infinite accuracy, and the regression coefficients associated with computing Granger Causality are precisely estimated, and the Granger Causality metric is perfectly computed (as is the case in our counter-examples), Granger Causal influence may \emph{still} not yield the correct direction of information flow. To our knowledge, the argument that Granger causal influence can be opposite to the direction of information flow is a novel one. We believe that this argument is much more serious than previous objections, at least in the context of determining the directions of information flow in neuroscientific experiments, towards understanding the computational functions of brain regions.
 
 % Intro: Our counter-examples -------------------------------------------------
 
@@ -347,14 +348,7 @@ A review of a submission to a previous conference raised some objections to this
 	\item We consider a simple point-to-point network. In general networks, this issue could be even more complex. However, since this issue shows up even for the simplest network, we feel that the problem will only be exacerbated when the network is large.
 \end{enumerate}
 
-\subsection{Discussion}
-\begin{enumerate}
-	\item \color{red} Some of this misconception might have arisen because of Massey's directed info conservation - we expect that dir info in the forward dirn goes up if the other one goes down - but this is a misnomer. (Do we still need this? I am increasingly of the opinion that directed info / GC capture nothing about the message)
-\end{enumerate}
-
-
 %Notes:
-
 %You only seem to be assuming that the variance is $\sigma_\theta^2$. Nothing about whether it is a uniform random variable or something derived from quantizing a uniform random variable, or a Gaussian one.
 
 % --------------------------------------------------------------------------- %
@@ -418,6 +412,7 @@ We also derive here an expression for $X_i$, which we will use later.
 \label{sec:analytical-results}
 
 \subsection{Granger causality for the noiseless feedback case}
+\label{sec:gc-noiseless}
 
 Suppose we try to use the Granger causality measure of directed influence to infer the direction of information flow. As discussed in Section~\ref{sec:intro}, one might expect the direction of information flow --- and hence the direction of greater Granger causality --- to be from the transmitter to the receiver.
 
@@ -469,6 +464,7 @@ so that $\text{Var}(\tilde\epsilon_i) = \sigma_N^2/i^2$. The Granger causality r
 The intuitive argument for why this is happening might go as follows: since the feedback link is noiseless, you can always perfectly predict the transmitted symbol from the $\widehat\Theta$'s and the history of $X$. On the other hand, you can never perfectly predict $\widehat\Theta_i$ from the $X$'s and the history of $\widehat\Theta$.
 
 \subsection{Directed Information for the noiseless feedback case}
+\label{sec:dir-info-noiseless}
 
 Performing the Directed Information analysis for the scheme described above yields the same results. In order to ease the burden of computing Directed Information, we assume that $\Theta$ is normally distributed.
 
@@ -583,9 +579,9 @@ As a final point, we note that estimating the regression coefficients accurately
 
 % --------------------------------------------------------------------------- %
 
-\section{Numerical results}
+\section{Numerical results demonstrating that Granger Causal influence can be opposite in direction to information flow}
 \label{sec:numerical-results}
-In the noiseless feedback case, the directed information on the forward link is finite, while that on the feedback link is infinite. However, the situation is more interesting when there is noise in the feedback link, as is illustrated in Fig.~\ref{fig:numerical} through numerical calculations of expressions in the last section. 
+In the noiseless feedback case, the directed information on the forward link is finite, while that on the feedback link is infinite (refer sections~\ref{sec:gc-noiseless} and~\ref{sec:dir-info-noiseless}). However, for completeness, we examine the case when noise is present in the feedback link, as is illustrated in Fig.~\ref{fig:numerical}, through numerical calculation of expressions in the last section. For cases where the noise variance of the feedback link ($\sigma_R^2$) is moderately smaller than feedforward noise variance ($\sigma_N^2$), we observe that the Directed Information in the direction of the reverse link can dominate that in the direction of the forward link. With sufficiently many (albeit sometimes a large number of) iterations, the Directed Information in forward direction starts to dominate. However, the point at which this happens depends on the (often unknown) ratio of noise in these links.
 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
 	\centering
@@ -599,9 +595,13 @@ In the noiseless feedback case, the directed information on the forward link is 
 \section{Conclusions and discussions}
 \label{sec:conclusions}
 
+
 There are several shortcomings of this work that need to be addressed for a more comprehensive understanding of the issue. First, our information source does not evolve with time, and hence our communication process (inspired from the scheme of Schalkwijk and Kailath~\cite{S&K} is non-ergodic. Since Granger causality is really just relative errors in prediction of a process, in presence or absence of knowledge of another process, we compute the obvious generalization of Granger causality to non-ergodic processes. Nevertheless, future work will address a situation with a linear dynamical system as the information source. Second, our experiments restrict themselves to Gaussian noise for simplicity, but neural spiking and spike-rate models for spikes tend to be very different from those used here. This is a clear direction for future work. Third, the power and energy constraints are somewhat oversimplified to make the analysis simpler. This is for simplicity of exposition. A more general analysis is a trivial extension. Finally, we consider a simple point-to-point network. In general networks, this issue could be even more complex. However, since this issue shows up even for the simplest network, we feel that the problem will only be exacerbated when the network is large.
 
 We note that Granger's original analysis does not compare Granger causality on forward and reverse links. We are doing so, in part because it is often done in practice. It strikes us that this is being done because of the ``conservation of directed information'', an equality first derived by Massey~\cite{massey2005conservation}. This equality, which states that the sum of forward and reverse Directed Informations is the mutual information, could be viewed as suggesting that an increase in Directed Information in one direction must reduce it in the other direction. However, this is not true. For e.g., making $X$ and $Y$ uncorrelated reduces Directed Information in both directions (along with their sum) to zero. In other words, Massey's law is not a conservation law in the sense of conservation laws of energy, momentum, or mass, where the total energy/momentum/mass (\textit{i.e.}, the RHS) remains conserved (\textit{i.e.}, constant) regardless of the experiment performed on the entities.
+
+% TODO: Include in final version:
+% Some of this misconception might have arisen because of Massey's directed info conservation - we expect that dir info in the forward dirn goes up if the other one goes down - but this is a misnomer. (Do we still need this? I am increasingly of the opinion that directed info / GC capture nothing about the message)
 
 \section*{Acknowledgments}
 
