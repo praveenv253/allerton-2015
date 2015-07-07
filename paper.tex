@@ -212,7 +212,7 @@ In order to compute the Granger causality in the reverse direction (from the rec
 \begin{equation*}
 	X_i = \sum_{j=1}^{p}{\alpha_j X_{i-j}} + \epsilon_i \numberthis \label{eq:ar-model-x-x}
 \end{equation*}
-We then compute coefficients $\alpha_j$ such that the average error in fitting $X_i$ for all $i$ is minimized. Note that $\alpha_j$ can themselves depend on $i$, since this is a non-stationary process (because the error $\Theta-\widehat{\Theta}_i = X_i$ converges to zero). We describe how these coefficients might be estimated in a more general setting, and justify using theoretically determined system parameters as regression coefficients in section~\ref{sec:estimating-ar-coeffs}.
+We then compute coefficients $\alpha_j$ such that the average error in fitting $X_i$ is minimized. Note that $\alpha_j$ can themselves depend on $i$, since this is a non-stationary process (because the error $\Theta-\widehat{\Theta}_i = X_i$ converges to zero). We describe how these coefficients might be estimated in a more general setting, and justify using theoretically determined system parameters as regression coefficients in section~\ref{sec:estimating-ar-coeffs}.
 
 For now, we theoretically evaluate the system parameters. We start with equation~\ref{eq:tx-x-noiseless} and manipulate terms to arrive at an equation bearing the required form of equation~\ref{eq:ar-model-x-x}:
 \begin{align*}
