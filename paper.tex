@@ -47,6 +47,13 @@ This work is in large part motivated by a recent surge of interest in understand
 
 In order to understand how the brain performs computations, it could be useful to first understand the directions of \emph{information flow} in various parts of the brain (e.g.~\cite{blinowska2004granger,dhamala2008analyzing,nolte2008robustly,korzeniewska2003determination,schippers2010mapping} etc.). In an effort to make headway on the goals of \emph{BRAIN 2025}, several works use Granger causality (and less often, its information-theoretic generalization -- Directed Information) to understand how this information flows (eg.~\cite{Brovelli2004BetaOscillations,goebel2003investigating,deshpande2008effective}), or to acquire directed maps of functional connectivity (eg.~\cite{friston2013analysing,goebel2003investigating,deshpande2008effective}). For instance, in~\cite{Brovelli2004BetaOscillations}, Granger causal influences that are measured between somatosensory and motor sites are said to ``support the idea that somatosensory feedback provides information to the sensorimotor system that is used to control motor output''. This raises the question: do these directed connectivity maps, as determined by directional causal influence measures such as Granger causality, correctly identify the directions along which information flows in the brain?
 
+\begin{figure}[htbp] %  figure placement: here, top, bottom, or page
+	\centering
+	\includegraphics[width=3.2in]{gc-vs-message}
+	\caption{Is the direction of stronger Granger-causal influence necessarily the same as the direction in which the information (or equivalently, the ``message'') is flowing?}
+	\label{fig:gc-vs-message}
+\end{figure}
+
 % Intro: How GC is used in neuroscience today ---------------------------------
 
 \subsection{How Granger Causality is used in Neuroscience today}
@@ -62,7 +69,7 @@ The computation of Granger causality, in general, requires that the processes un
 	\centering
 	\includegraphics[width=3.2in]{gc-comparison}
 	\caption{In order to determine the direction of greater causal influence, the Granger Causality metrics in the forward and reverse directions are compared}
-	\label{fig:sk-block-diagram}
+	\label{fig:gc-comparison}
 \end{figure}
 
 In order to determine the direction of greater causal influence, the Granger Causality metric (ratio of residual variances) from $\{X\}$ to $\{Y\}$ is \emph{compared} to that from $\{Y\}$ to $\{X\}$. The direction of causal influence is taken to be the direction with a greater Granger Causality metric. Further, this direction of causal influence is interpreted to be the direction of information flow -- the interpretation we question in this paper. We also note that many of these works use a spectral version of Granger Causality, that supplies this metric as a function of frequency. It then becomes possible to also determine the brain wave frequency at which these influences occur. However, we restrict our analysis to the simpler non-spectral version of Granger Causality, since it is sufficient to for the purpose of our arguments.
@@ -252,7 +259,7 @@ In the forward direction, we do not explicitly compute the Granger causality rat
 					 &= \frac{i-1}{i} \widehat\Theta_{i-1} + \frac{\Theta}{i} + \frac{N_i}{i}
 \end{align*}
 which means that $0 < \frac{\sigma_N^2}{i^2} < \text{Var}(\epsilon_i) < \frac{\sigma_N^2 + \sigma_\theta^2}{i^2} < \infty$.
-Further, if we try to predict $\widehat\Theta_i$ from the previous $\widehat\Theta_{i-i}$ and $X_{i-j}$:
+Further, if we try to predict $\widehat\Theta_i$ from the previous $\widehat\Theta_{i-j}$ and $X_{i-j}$:
 \begin{equation}
 	\widehat\Theta_i = \sum_{j=1}^{p}{\alpha_j \widehat\Theta_{i-j}} + \sum_{j=0}^{p-1}{\beta_j X_{i-j}} + \tilde\epsilon_i \label{eq:ar-model-theta-theta-x}
 \end{equation}
@@ -262,7 +269,7 @@ we see that
 \end{equation*}
 so that $\text{Var}(\tilde\epsilon_i) = \sigma_N^2/i^2$. The Granger causality ratio, $\text{Var}(\epsilon_i) / \text{Var}(\tilde\epsilon_i)$, in the forward direction is, therefore, finite.
 
-The intuitive argument for why this is happening might go as follows: since the feedback link is noiseless, you can always perfectly predict the transmitted symbol from the present and past $\widehat\Theta$'s and the history of $X$. On the other hand, you can never perfectly predict $\widehat\Theta_i$ from the present and past $X$'s and the history of $\widehat\Theta$.
+The intuitive argument for why this is happening might go as follows: since the feedback link is noiseless, you can always perfectly predict the transmitted symbol from the past $\widehat\Theta$'s and the history of $X$. On the other hand, you can never perfectly predict $\widehat\Theta_i$ from the past $X$'s and the history of $\widehat\Theta$.
 
 % Computing Directed Information: Noiseless feedback --------------------------
 
