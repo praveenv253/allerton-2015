@@ -119,7 +119,7 @@ A review of a submission to a previous conference raised some objections to this
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
 	\centering
 	\includegraphics[width=3.2in]{sk-block-diagram}
-	\caption{A block-diagram representation of the communication system, describing the feedback channels and supplying notation for the variables used throughout the paper.}
+	\caption{A block-diagram representation of the communication system, describing the feedback channels and supplying notation for the variables used throughout the paper. Note that this diagram is the more general of the two cases discussed in sub-sections~\ref{sec:sk-noiseless} and~\ref{sec:sk-noisy}, as it contains noise in the feedback link. The former, noiseless, case is equivalent to setting $\sigma_R^2$ to 0.}
 	\label{fig:sk-block-diagram}
 \end{figure}
 
@@ -131,6 +131,8 @@ $\sigma_\theta^2$, to the receiver. $\Theta$ could be obtained, for instance, by
 % S&K: Noiseless feedback -----------------------------------------------------
 
 \subsection{Noiseless feedback: the Schalkwijk-Kailath strategy}
+\label{sec:sk-noiseless}
+
  In the first step, the transmitter sends\footnote{We assume that the power constraints are such that the scaling constant $\alpha$ in~\cite{S&K} is $1$.} $X_1 = \Theta$, which the receiver receives with added noise. The receiver sends back an estimate of $\Theta$ over the feedback link. In all subsequent iterations, the transmitter sends the receiver the error in its latest estimate.
 
 Therefore, in general, the transmitter sends $X_i = \Theta - \widehat\Theta_{i-1}$ and the receiver receives $Y_i = X_i + N_i$, where $N_i \sim \mathcal{N}(0, \sigma_N^2)$ iid. The receiver then estimates $\widehat\Theta_i = \widehat\Theta_{i-1} + \frac{Y_i}{i}$, which results in:
@@ -155,6 +157,8 @@ Through this scheme, the estimate $\widehat{\Theta}_{i}$ is seen to converge to 
 % S&K: Noisy feedback ---------------------------------------------------------
 
 \subsection{Noisy feedback}
+\label{sec:sk-noisy}
+
 In the presence of noise in the feedback link, restricting our attention to linear strategies, we can use a simple modification of the Schalkwijk-Kailath strategy, incorporating the feedback\footnote{We note that implicitly, this strategy assumes an energy/SNR constraint on the feedback link. This is because the receiver simply sends back the estimate, which is shown to converge to the true value of $\Theta$.}. The receiver still simply transmits the estimate $\widehat{\Theta}_i$ based on the $i$-th forward channel output $Y_i=X_i+N_i$. The transmitter now receives corrupted versions $Z_i=\widehat\Theta_{i-1} + R_{i-1}$ of the receiver's transmissions. That is,
 \begin{align*}
 	\text{Transmitter's transmissions:}\;X_i &= \Theta - (\widehat\Theta_{i-1} + R_{i-1}) \\
