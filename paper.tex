@@ -135,7 +135,19 @@ $\sigma_\theta^2$, to the receiver. $\Theta$ could be obtained, for instance, by
 
  In the first step, the transmitter sends\footnote{We assume that the power constraints are such that the scaling constant $\alpha$ in~\cite{S&K} is $1$.} $X_1 = \Theta$, which the receiver receives with added noise. The receiver sends back an estimate of $\Theta$ over the feedback link. In all subsequent iterations, the transmitter sends the receiver the error in its latest estimate.
 
-Therefore, in general, the transmitter sends $X_i = \Theta - \widehat\Theta_{i-1}$ and the receiver receives $Y_i = X_i + N_i$, where $N_i \sim \mathcal{N}(0, \sigma_N^2)$ iid. The receiver then estimates $\widehat\Theta_i = \widehat\Theta_{i-1} + \frac{Y_i}{i}$, which results in:
+Therefore, in general, the transmitter sends
+\begin{equation}
+	X_i = \Theta - \widehat\Theta_{i-1} \label{eq:tx-x-noiseless}
+\end{equation}
+and the receiver receives
+\begin{equation}
+	Y_i = X_i + N_i
+\end{equation}
+where $N_i \sim \mathcal{N}(0, \sigma_N^2)$ iid. The receiver then estimates
+\begin{equation}
+	\widehat\Theta_i = \widehat\Theta_{i-1} + \frac{Y_i}{i} \label{eq:rx-thetahat-noiseless}
+\end{equation}
+which results in:
 \begin{align*}
 	\widehat{\Theta}_{i}  &= \widehat{\Theta}_{i-1}+\frac{X_{i}+N_{i}}{i} \\
 					  &= \widehat{\Theta}_{i-1}+\frac{\Theta-\widehat{\Theta}_{i-1}+N_{i}}{i} \\
@@ -160,11 +172,11 @@ Through this scheme, the estimate $\widehat{\Theta}_{i}$ is seen to converge to 
 \label{sec:sk-noisy}
 
 In the presence of noise in the feedback link, restricting our attention to linear strategies, we can use a simple modification of the Schalkwijk-Kailath strategy, incorporating the feedback\footnote{We note that implicitly, this strategy assumes an energy/SNR constraint on the feedback link. This is because the receiver simply sends back the estimate, which is shown to converge to the true value of $\Theta$.}. The receiver still simply transmits the estimate $\widehat{\Theta}_i$ based on the $i$-th forward channel output $Y_i=X_i+N_i$. The transmitter now receives corrupted versions $Z_i=\widehat\Theta_{i-1} + R_{i-1}$ of the receiver's transmissions. That is,
-\begin{align*}
-	\text{Transmitter's transmissions:}\;X_i &= \Theta - (\widehat\Theta_{i-1} + R_{i-1}) \\
-	\text{Channel outputs at the receiver:}\;	Y_i &= X_i + N_i \\
-	\text{Receiver's estimates \& transmissions:}\;	\widehat\Theta_i &= \widehat\Theta_{i-1} + \frac{Y_i}{i}
-\end{align*}
+\begin{align}
+	& \text{Transmitter's transmissions:}\;X_i = \Theta - (\widehat\Theta_{i-1} + R_{i-1}) \\ \label{eq:noisy-tx-x}
+	& \text{Channel outputs at the receiver:}\;	Y_i = X_i + N_i \\
+	& \text{Receiver's estimates \& transmissions:}\;	\widehat\Theta_i = \widehat\Theta_{i-1} + \frac{Y_i}{i}
+\end{align}
 where $R_{i-1}$ is the AWGN noise in the reverse link. $R_i \sim \mathcal{N}(0, \sigma_R^2)$ are iid random variables.
 
 Linear strategies are known to be suboptimal for the communication problem~\cite{YoungHanKimPaper} (where $\Theta$ is a quantized random variable communicating a finite-rate message reliably), and for problems with non-classical information structures in general~\cite{Witsenhausen68}. Nevertheless, we now show that the resulting estimates $\widehat{\Theta}_i$  still converge to $\Theta$ in mean-square sense:
@@ -196,11 +208,13 @@ We also derive here an expression for $X_i$, which we will use later.
 
 Suppose we try to use the Granger causality measure of directed influence to infer the direction of information flow. As discussed in Section~\ref{sec:intro}, one might expect the direction of information flow -- and hence the direction of greater Granger causality -- to be from the transmitter to the receiver.
 
-In order to compute the Granger causality in the reverse direction (from receiver to transmitter), we wish first to compute coefficients $\alpha_j$ such that:
+In order to compute the Granger causality in the reverse direction (from the receiver to the transmitter), we model $X_i$ as a linear function of its past.
 \begin{equation*}
 	X_i = \sum_{j=1}^{p}{\alpha_j X_{i-j}} + \epsilon_i \numberthis \label{eq:ar-model-x-x}
 \end{equation*}
-Note that $\alpha_j$ can themselves depend on $i$, since this is a non-stationary process (because the error $\Theta-\widehat{\Theta}_i = X_i$ converges to zero).
+We then compute coefficients $\alpha_j$ such that the average error in fitting $X_i$ for all $i$ is minimized. Note that $\alpha_j$ can themselves depend on $i$, since this is a non-stationary process (because the error $\Theta-\widehat{\Theta}_i = X_i$ converges to zero). We describe how these coefficients might be estimated in a more general setting, and justify using theoretically determined system parameters as regression coefficients in section~\ref{sec:estimating-ar-coeffs}.
+
+For now, we theoretically evaluate the system parameters. We start with equation~\ref{eq:tx-x-noiseless} and manipulate terms to arrive at an equation bearing the required form of equation~\ref{eq:ar-model-x-x}:
 \begin{align*}
 	X_i &= \Theta - \widehat\Theta_{i-1} \\
 		&= \Theta - \big( \widehat\Theta_{i-2} + \frac{Y_{i-1}}{i-1} \big) \\
@@ -210,21 +224,21 @@ Note that $\alpha_j$ can themselves depend on $i$, since this is a non-stationar
 \end{align*}
 Therefore, $\alpha_1 = \frac{i-2}{i-1}$ and $\epsilon_i = \frac{N_{i-1}}{i-1}$, and hence $\text{Var}(\epsilon_i) = \frac{\sigma_N^2}{(i-1)^2}$.
 
-Next, we wish to write $X_i$ in terms of $X_{i-j}$ and $\widehat\Theta_{i-j}$:
-\begin{equation*}
-	X_i = \sum_{j=1}^{p}{\alpha_j X_{i-j}} + \sum_{j=1}^{p}{\beta_j \widehat\Theta_{i-j}} + \tilde\epsilon_i \numberthis \label{eq:ar-model-x-x-theta}
-\end{equation*}
-which gives
+Next, we model $X_i$ in terms of both the past of $X$ and the past of $\widehat\Theta$:
+\begin{equation}
+	X_i = \sum_{j=1}^{p}{\alpha_j X_{i-j}} + \sum_{j=1}^{p}{\beta_j \widehat\Theta_{i-j}} + \tilde\epsilon_i \label{eq:ar-model-x-x-theta}
+\end{equation}
+We can manipulate equation~\ref{eq:tx-x-noiseless} to bring it into the above form:
 \begin{align*}
 	X_i &= \Theta - \widehat\Theta_{i-1} \\
 		&= X_{i-1} + \widehat\Theta_{i-2} - \widehat\Theta_{i-1}
 \end{align*}
 Since there is no noise expression here, the Granger causality ratio, $\text{Var}(\epsilon_i) / \text{Var}(\tilde\epsilon_i)$ goes to infinity.
 
-In the forward direction, we do not explicitly compute the Granger causality ratio, but simply show that it is bounded strictly between 0 and $\infty$:
-\begin{equation*}
-	\widehat\Theta_i = \sum_{j=1}^p{\alpha_j \widehat\Theta_{i-j}} + \epsilon_i
-\end{equation*}
+In the forward direction, we do not explicitly compute the Granger causality ratio, but simply show that it is bounded strictly between 1 and $\infty$:
+\begin{equation}
+	\widehat\Theta_i = \sum_{j=1}^p{\alpha_j \widehat\Theta_{i-j}} + \epsilon_i \label{eq:ar-model-theta-theta}
+\end{equation}
 \begin{align*}
 	\widehat\Theta_i &= \widehat\Theta_{i-1} + \frac{X_i + N_i}{i} \\
 					 &= \widehat\Theta_{i-1} + \frac{\Theta - \widehat\Theta_{i-1} + N_i}{i} \\
@@ -232,16 +246,16 @@ In the forward direction, we do not explicitly compute the Granger causality rat
 \end{align*}
 which means that $0 < \frac{\sigma_N^2}{i^2} < \text{Var}(\epsilon_i) < \frac{\sigma_N^2 + \sigma_\theta^2}{i^2} < \infty$.
 Further, if we try to predict $\widehat\Theta_i$ from the previous $\widehat\Theta_{i-i}$ and $X_{i-j}$:
-\begin{equation*}
-	\widehat\Theta_i = \sum_{j=1}^{p}{\alpha_j \widehat\Theta_{i-j}} + \sum_{j=0}^{p-1}{\beta_j X_{i-j}} + \tilde\epsilon_i
-\end{equation*}
+\begin{equation}
+	\widehat\Theta_i = \sum_{j=1}^{p}{\alpha_j \widehat\Theta_{i-j}} + \sum_{j=0}^{p-1}{\beta_j X_{i-j}} + \tilde\epsilon_i \label{eq:ar-model-theta-theta-x}
+\end{equation}
 we see that
 \begin{equation*}
 	\widehat\Theta_i = \widehat\Theta_{i-1} + \frac{X_i}{i} + \frac{N_i}{i}
 \end{equation*}
 so that $\text{Var}(\tilde\epsilon_i) = \sigma_N^2/i^2$. The Granger causality ratio, $\text{Var}(\epsilon_i) / \text{Var}(\tilde\epsilon_i)$, in the forward direction is, therefore, finite.
 
-The intuitive argument for why this is happening might go as follows: since the feedback link is noiseless, you can always perfectly predict the transmitted symbol from the $\widehat\Theta$'s and the history of $X$. On the other hand, you can never perfectly predict $\widehat\Theta_i$ from the $X$'s and the history of $\widehat\Theta$.
+The intuitive argument for why this is happening might go as follows: since the feedback link is noiseless, you can always perfectly predict the transmitted symbol from the present and past $\widehat\Theta$'s and the history of $X$. On the other hand, you can never perfectly predict $\widehat\Theta_i$ from the present and past $X$'s and the history of $\widehat\Theta$.
 
 % Computing Directed Information: Noiseless feedback --------------------------
 
