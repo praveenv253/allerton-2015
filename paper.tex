@@ -258,8 +258,7 @@
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
 \title{Is the direction of Granger causal influence the same as the direction of information flow?}
-\author{Praveen Venkatesh\\vpraveen@cmu.edu\\Carnegie Mellon University}
-\author{Pulkit Grover\\pulkit@cmu.edu\\Carnegie Mellon University}
+\author{Praveen Venkatesh and Pulkit Grover\\Carnegie Mellon University}
 
 % make the title area
 \maketitle
@@ -297,7 +296,7 @@ Granger causality, as originally described by Granger~\cite{Granger1969Investiga
 
 The computation of Granger causality, in general, requires that the processes under consideration be stationary. In neuroscientific experiments, this is usually not the case, as the express objective of the experiment is to understand brain function while the brain is subjected to a task. Typically, data analysis techniques either assume stationarity regardless, or circumvent the problem by working with time-windows short enough that the processes \emph{are} in fact stationary within those windows~\cite{Ding2000ShortWindow}. In the latter case, Granger causal influences are computed for each window individually, in order to produce a dynamic description of brain connectivity as the brain carries out the said task. The Granger Causality metrics can be accurately computed even for short time windows, because neuroscientific experiments usually have multiple trials, i.e.\ multiple realizations of the same processes, allowing for fitting regression coefficients accurately~\cite{Ding2000ShortWindow}.
 
-In order to determine the direction of causal influence, the Granger Causality metric (ratio of residual variances) from $\{X\}$ to $\{Y\}$ is \emph{compared} to that from $\{Y\}$ to $\{X\}$. The direction of causal influence is taken to be the direction with a greater Granger Causality metric. Further, this direction of causal influence is interpreted to be the direction of informationf flow -- the interpretation we question in this paper. We also note that many of these works use a spectral version of Granger Causality, that supplies this metric as a function of frequency. It then becomes possible to also determine the brain wave frequency at which these influences occur. However, we restrict our analysis to the simpler non-spectral version of Granger Causality, since it is sufficient to for the purpose of our arguments.
+In order to determine the direction of causal influence, the Granger Causality metric (ratio of residual variances) from $\{X\}$ to $\{Y\}$ is \emph{compared} to that from $\{Y\}$ to $\{X\}$. The direction of causal influence is taken to be the direction with a greater Granger Causality metric. Further, this direction of causal influence is interpreted to be the direction of information flow -- the interpretation we question in this paper. We also note that many of these works use a spectral version of Granger Causality, that supplies this metric as a function of frequency. It then becomes possible to also determine the brain wave frequency at which these influences occur. However, we restrict our analysis to the simpler non-spectral version of Granger Causality, since it is sufficient to for the purpose of our arguments.
 
 We note here that Granger's original analysis does not compare this metric on forward and reverse links, however, this is commonly done in practice even in areas beyond neuroscience (eg.~\cite{Brovelli2004BetaOscillations,jiao2013universal}).
 
@@ -312,7 +311,7 @@ Several objections have been leveled against Granger Causality in the past. We g
 
 \begin{enumerate}
 	\item First, Granger Causality suffers from what we call the ``hidden node problem''. If two observed nodes receive causal influences from a third, latent node, then a causal influence may be detected between the observed nodes, even if they are independent of each other~\cite{pearl2009causality-hidden-node}. All nodes need to be observed, therefore, to avoid finding spurious influences.
-	\item Second, if the measurements from each node are differentially affected by noise, then the predicted direction of causal influence might be opposite to the true direction (\cite{nalatore2007mitigating,andersson2005testing}). Measurements need to be relatively noiseless and precise in order to obtain the correct direction of causal influece.
+	\item Second, if the measurements from each node are differentially affected by noise, then the predicted direction of causal influence might be opposite to the true direction (\cite{nalatore2007mitigating,andersson2005testing}). Measurements need to be relatively noiseless and precise in order to obtain the correct direction of causal influence.
 	\item Third, subsampling the processes can produce misleading Granger Causal relations~\cite{gong2015discovering}. Performing Granger Causal analysis on subsampled time series can lead one to miss the causal influence. If pre-processing involves subsampling, then this should be done with care.
 \end{enumerate}
 
@@ -528,7 +527,7 @@ For a derivation of this, see appendix~\ref{app:dir-info-rev-noisy}.
 \subsection{A note on non-stationarity and estimating regression coefficients}
 \label{sec:estimating-ar-coeffs}
 
-The Granger Causality and Directed Inforamtion metrics are a function of the regression coefficients estimated from the data by fitting the models given by equations~\ref{eq:ar-model-x-x} and~\ref{eq:ar-model-x-x-theta}. In our analysis, we described the data-generation model: the algorithm inspired by the Schalkwijk and Kailath scheme for feedback communication. We then proceeded to use the regression coefficients generated by this model directly. This could be construed as erroneous: we ought to simulate the data generation, and compute the regression coefficients from the generated data. This would better model the actions of the neuroscientist who seeks to perform a Granger Causal analysis.
+The Granger Causality and Directed Information metrics are a function of the regression coefficients estimated from the data by fitting the models given by equations~\ref{eq:ar-model-x-x} and~\ref{eq:ar-model-x-x-theta}. In our analysis, we described the data-generation model: the algorithm inspired by the Schalkwijk and Kailath scheme for feedback communication. We then proceeded to use the regression coefficients generated by this model directly. This could be construed as erroneous: we ought to simulate the data generation, and compute the regression coefficients from the generated data. This would better model the actions of the neuroscientist who seeks to perform a Granger Causal analysis.
 
 We justify our use of the theoretical regression coefficients as follows: we assume that the regression coefficients can be accurately estimated from data, since neuroscientific experiments typically record the \emph{same} processes multiple times -- these are called ``trials''. The availability of multiple trials of the same process can be leveraged to estimate the regression coefficients accurately, even if the processes are non-stationary.
 
