@@ -365,19 +365,23 @@ Note that $\alpha_j(t)$ does not depend on $i$. Collecting variables across $N$ 
 			X_t^{(N)}
 	\end{array} \right]
 	&=
-	\left[ \begin{array}{cccc}
-			X_{t-1}^{(1)} & X_{t-2}^{(1)} & \cdots & X_{t-p}^{(1)} \\
-			X_{t-1}^{(2)} & X_{t-2}^{(2)} & \cdots & X_{t-p}^{(2)} \\
-			\vdots &  & \ddots & \vdots \\
-			X_{t-1}^{(N)} & X_{t-2}^{(N)} & \cdots & X_{t-p}^{(N)} \\
+	\left[ \begin{array}{ccc}
+			X_{t-1}^{(1)} & \cdots & X_{t-p}^{(1)} \\
+			X_{t-1}^{(2)} & \cdots & X_{t-p}^{(2)} \\
+			\vdots & \ddots & \vdots \\
+			X_{t-1}^{(N)} & \cdots & X_{t-p}^{(N)} \\
+			%X_{t-1}^{(1)} & X_{t-2}^{(1)} & \cdots & X_{t-p}^{(1)} \\
+			%X_{t-1}^{(2)} & X_{t-2}^{(2)} & \cdots & X_{t-p}^{(2)} \\
+			%\vdots &  & \ddots & \vdots \\
+			%X_{t-1}^{(N)} & X_{t-2}^{(N)} & \cdots & X_{t-p}^{(N)} \\
 	\end{array} \right]
 	\left[ \begin{array}{c}
 			\alpha_1(t) \\
 			\alpha_2(t) \\
 			\vdots \\
 			\alpha_p(t)
-	\end{array} \right] \\
-	&\qquad \qquad \qquad +
+	\end{array} \right] +
+	%&\qquad \qquad \qquad +
 	\left[ \begin{array}{c}
 			\epsilon_t^{(1)} \\
 			\epsilon_t^{(2)} \\
