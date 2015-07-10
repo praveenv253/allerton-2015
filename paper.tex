@@ -231,7 +231,7 @@ In order to compute the Granger causality in the reverse direction (from the rec
 \end{equation*}
 We then compute coefficients $\alpha_j$ such that the average error in fitting $X_i$ is minimized. Note that $\alpha_j$ can themselves depend on $i$, since this is a non-stationary process (because the error $\Theta-\widehat{\Theta}_i = X_i$ converges to zero). We describe how these coefficients might be estimated in a more general setting, and justify using theoretically determined system parameters as regression coefficients in section~\ref{sec:estimating-ar-coeffs}.
 
-For now, we theoretically evaluate the system parameters. We start with equation~\ref{eq:tx-x-noiseless} and manipulate terms to arrive at an equation bearing the required form of equation~\ref{eq:ar-model-x-x}:
+For now, we theoretically evaluate the system parameters. We start with equation~\eqref{eq:tx-x-noiseless} and manipulate terms to arrive at an equation bearing the required form of equation~\eqref{eq:ar-model-x-x}:
 \begin{align*}
 	X_i &= \Theta - \widehat\Theta_{i-1} \\
 		&= \Theta - \big( \widehat\Theta_{i-2} + \frac{Y_{i-1}}{i-1} \big) \\
@@ -245,7 +245,7 @@ Next, we model $X_i$ in terms of both the past of $X$ and the past of $\widehat\
 \begin{equation}
 	X_i = \sum_{j=1}^{p}{\alpha_j X_{i-j}} + \sum_{j=1}^{p}{\beta_j \widehat\Theta_{i-j}} + \tilde\epsilon_i \label{eq:ar-model-x-x-theta}
 \end{equation}
-We can manipulate equation~\ref{eq:tx-x-noiseless} to bring it into the above form:
+We can manipulate equation~\eqref{eq:tx-x-noiseless} to bring it into the above form:
 \begin{align*}
 	X_i &= \Theta - \widehat\Theta_{i-1} \\
 		&= X_{i-1} + \widehat\Theta_{i-2} - \widehat\Theta_{i-1}
@@ -346,11 +346,11 @@ For a derivation of this, see appendix~\ref{app:dir-info-rev-noisy}.
 \subsection{A note on estimating regression coefficients}
 \label{sec:estimating-ar-coeffs}
 
-The Granger Causality and Directed Information metrics are a function of the regression coefficients estimated from the data by fitting the models given by equations~\ref{eq:ar-model-x-x} and~\ref{eq:ar-model-x-x-theta}. In our analysis, we described the data-generation model: the algorithm inspired by the Schalkwijk and Kailath scheme for feedback communication. We then proceeded to use the system parameters of this model directly as regression coefficients in our Granger Causality computation. This could be construed as being erroneous: we ought to simulate the data generation, and estimate the regression coefficients from the generated data. This would better model the actions of the neuroscientist who seeks to perform Granger Causality analysis.
+The Granger Causality and Directed Information metrics are a function of the regression coefficients estimated from the data by fitting the models given by equations~\eqref{eq:ar-model-x-x} and~\eqref{eq:ar-model-x-x-theta}. In our analysis, we described the data-generation model: the algorithm inspired by the Schalkwijk and Kailath scheme for feedback communication. We then proceeded to use the system parameters of this model directly as regression coefficients in our Granger Causality computation. This could be construed as being erroneous: we ought to simulate the data generation, and estimate the regression coefficients from the generated data. This would better model the actions of the neuroscientist who seeks to perform Granger Causality analysis.
 
 We justify our knowledge of the system parameters and their use as regression coefficients in the following manner: we assume that the regression coefficients can be accurately estimated from data, since neuroscientific experiments typically record the \emph{same} processes multiple times -- these are called ``trials''. The availability of multiple trials of the same process can be leveraged to estimate the system parameters accurately, even if the processes are non-stationary.
 
-Suppose we record two non-stationary processes, $\{X_t\}_{t=1}^n$ and $\{Y_t\}_{t=1}^n$, for which we seek to compute the Granger Causality metrics. To this end, we must find coefficients $\alpha_j(t)$ and $\beta_j(t)$ to minimize the error in fitting the models given by equations~\ref{eq:ar-model-x-x} and~\ref{eq:ar-model-x-x-theta}. Note that $\alpha$ and $\beta$ depend on $t$, since we assume the process is non-stationary. However, since we record the \emph{same} process in each trial, the $\alpha_j(t)$ and $\beta_j(t)$ are constant across trials. Estimating them from data that has many trials is then a simple matter of linear regression.
+Suppose we record two non-stationary processes, $\{X_t\}_{t=1}^n$ and $\{Y_t\}_{t=1}^n$, for which we seek to compute the Granger Causality metrics. To this end, we must find coefficients $\alpha_j(t)$ and $\beta_j(t)$ to minimize the error in fitting the models given by equations~\eqref{eq:ar-model-x-x} and~\eqref{eq:ar-model-x-x-theta}. Note that $\alpha$ and $\beta$ depend on $t$, since we assume the process is non-stationary. However, since we record the \emph{same} process in each trial, the $\alpha_j(t)$ and $\beta_j(t)$ are constant across trials. Estimating them from data that has many trials is then a simple matter of linear regression.
 
 For a given time instant $t$, the $i$\textsuperscript{th} trial is modeled as
 \begin{equation*}
@@ -394,7 +394,7 @@ If we call the vector on the LHS $\bf{Y}$ and the matrix on the RHS $\bf{X}$, th
 \begin{equation*}
 \hat{\bf{\alpha}}(t) = (\bf{X}^T \bf{X})^{-1} \bf{X}^T \bf{Y}
 \end{equation*}
-This is an unbiased and consistent estimator for $\bf{\alpha}(t)$. This analysis can be trivially extended to the model described by equation~\ref{eq:ar-model-x-x-theta}. With a sufficiently large number of trials, therefore, the system parameters (to be used as regression coefficients in the Granger Causality analysis) can be estimated to arbitrarily high accuracy.
+This is an unbiased and consistent estimator for $\bf{\alpha}(t)$. This analysis can be trivially extended to the model described by equation~\eqref{eq:ar-model-x-x-theta}. With a sufficiently large number of trials, therefore, the system parameters (to be used as regression coefficients in the Granger Causality analysis) can be estimated to arbitrarily high accuracy.
 
 It should be noted that we have restricted ourselves to an analysis of linear strategies: the channel, the extended Schalkwijk and Kailath scheme to a noisy feedback link, and the proposed regression model are all linear.
 
