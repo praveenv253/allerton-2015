@@ -337,7 +337,7 @@ In the reverse direction,
 	I(0*\widehat\Theta^{n-1} & \rightarrow X^n) = \sum_{i=0}^{n-1}{I(X_{i+1}; \widehat\Theta^i | X^i)} \\
 							 &= \sum_{i=0}^{n-1}{h(X_{i+1} | X^i) - h(X_{i+1} | X^i, \widehat\Theta^i)} \numberthis \label{eq:dir-info-rev-noisy} \\
 							 &= \frac{1}{2} \log \bigg( 2 \pi e \frac{\sigma_N^2 + \sigma_R^2}{\sigma_R^2} \bigg) \\
-							 & \; \; + \sum_{i=2}^{n-1} \bigg( \frac{1}{2} \log \bigg( 2 \pi e \text{Var} \bigg[ R_{i-1} - \frac{N_i}{i} - R_i \bigg| X^i \bigg] \bigg) \\
+							 & + \sum_{i=2}^{n-1} \bigg( \frac{1}{2} \log \bigg( 2 \pi e \text{Var} \bigg[ R_{i-1} - \frac{N_i}{i} - R_i \bigg| X^i \bigg] \bigg) \\
 							 & \qquad \qquad - \frac{1}{2} \log( 2 \pi e \sigma_R^2 ) \bigg)
 \end{align*}
 For a derivation of this, see appendix~\ref{app:dir-info-rev-noisy}.
@@ -359,14 +359,14 @@ For a given time instant $t$, the $i$\textsuperscript{th} trial is modeled as
 \end{equation*}
 Note that $\alpha_j(t)$ does not depend on $i$. Collecting variables across $N$ trials, we can write the full model in vector form:
 \begin{align*}
-	\left[ \begin{array}{c}
+	\left[ \!\! \begin{array}{c}
 			X_t^{(1)} \\
 			X_t^{(2)} \\
 			\vdots \\
 			X_t^{(N)}
-	\end{array} \right]
+	\end{array} \!\! \right]
 	&=
-	\left[ \begin{array}{ccc}
+	\left[ \! \begin{array}{ccc}
 			X_{t-1}^{(1)} & \cdots & X_{t-p}^{(1)} \\
 			X_{t-1}^{(2)} & \cdots & X_{t-p}^{(2)} \\
 			\vdots & \ddots & \vdots \\
@@ -375,20 +375,20 @@ Note that $\alpha_j(t)$ does not depend on $i$. Collecting variables across $N$ 
 			%X_{t-1}^{(2)} & X_{t-2}^{(2)} & \cdots & X_{t-p}^{(2)} \\
 			%\vdots &  & \ddots & \vdots \\
 			%X_{t-1}^{(N)} & X_{t-2}^{(N)} & \cdots & X_{t-p}^{(N)} \\
-	\end{array} \right]
-	\left[ \begin{array}{c}
+	\end{array} \! \right]
+	\left[ \!\! \begin{array}{c}
 			\alpha_1(t) \\
 			\alpha_2(t) \\
 			\vdots \\
 			\alpha_p(t)
-	\end{array} \right] +
+	\end{array} \!\! \right] +
 	%&\qquad \qquad \qquad +
-	\left[ \begin{array}{c}
+	\left[ \!\! \begin{array}{c}
 			\epsilon_t^{(1)} \\
 			\epsilon_t^{(2)} \\
 			\vdots \\
 			\epsilon_t^{(N)}
-	\end{array} \right]
+	\end{array} \!\! \right]
 \end{align*}
 
 If we call the vector on the LHS $\bf{Y}$ and the matrix on the RHS $\bf{X}$, then the vector of $\alpha_j(t)$'s ($\bf{\alpha}(t)$) can be estimated at time instant $t$ using Ordinary Least Squares:
@@ -556,11 +556,16 @@ For $i \geq 3$ and $j \in \{3, \ldots i\}$, we can use equation \eqref{eq:x_i-no
 	\mathbb{E}[U X_1] &= \mathbb{E} \bigg[ \bigg( R_{i-1} - \frac{N_i}{i} - R_i \bigg) \Theta \bigg] = 0 \; \\
 	\mathbb{E}[U X_2] &= \mathbb{E} \bigg[ \bigg( R_{i-1} - \frac{N_i}{i} - R_i \bigg) (\Theta - (\Theta + N_i) - R_1) \bigg] = 0 \; \\
 	\mathbb{E}[X_p X_q] &= \mathbb{E} \bigg[ \bigg( \frac{1}{p-1} \sum_{k=1}^{p-2} R_k - \frac{1}{p-1} \sum_{k=1}^{p-1} N_k - R_{p-1} \bigg) \\
-						& \qquad             \bigg( \frac{1}{q-1} \sum_{k=1}^{q-2} R_k - \frac{1}{q-1} \sum_{k=1}^{q-1} N_k - R_{q-1} \bigg) \bigg] \\
-					    &= \frac{\min\{p-2, q-2\}}{(p-1)(q-1)} \sigma_R^2 + \frac{\min\{p-1, q-1\}}{(p-1)(q-1)} \sigma_N^2 \\
+						& \qquad             \bigg( \frac{1}{q-1} \sum_{k=1}^{q-2} R_k - \frac{1}{q-1} \sum_{k=1}^{q-1} N_k - R_{q-1} \bigg) \bigg]
+\end{align*}
+\vspace{-12pt}
+\begin{align*}
+					    &= \frac{\min\{p-2, q-2\}}{(p-1)(q-1)} \sigma_R^2 \\
+						& \qquad + \frac{\min\{p-1, q-1\}}{(p-1)(q-1)} \sigma_N^2 \\
 						& \qquad + \sigma_R^2 \delta_{pq} + \frac{1}{p-1} \sigma_R^2 \mathbb{I}_{p>q} + \frac{1}{q-1} \sigma_R^2 \mathbb{I}_{q>p} \\
 	\mathbb{E}[X_1 X_1] &= \mathbb{E}[\Theta^2] = \sigma_\theta^2 \\
-	\mathbb{E}[X_1 X_j] &= \mathbb{E} \bigg[ \Theta \bigg( \frac{1}{j-1} \sum_{k=1}^{j-2} R_k - \frac{1}{j-1} \sum_{k=1}^{j-1} N_k - R_{j-1} \bigg) \bigg] = 0 \\
+	\mathbb{E}[X_1 X_j] &= \mathbb{E} \bigg[ \Theta \bigg( \frac{1}{j-1} \sum_{k=1}^{j-2} R_k \\
+						& \qquad \qquad \qquad - \frac{1}{j-1} \sum_{k=1}^{j-1} N_k - R_{j-1} \bigg) \bigg] = 0 \\
 	\text{Var}[U|X^i] &= \mathbb{E}[U^2] - \mathbb{E}[U X^i] \mathbb{E}[X^i {X^i}^T]^{-1} \mathbb{E}[X^i U] \\
 	h(U | X^i) &= \frac{1}{2}\log(2 \pi e \text{Var}[U | X^i]) \numberthis \label{eq:h_x_x-noisy}
 \end{align*}
