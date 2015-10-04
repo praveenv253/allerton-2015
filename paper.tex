@@ -229,7 +229,7 @@ We also derive here an expression for $X_i$, which we will use later.
 \subsection{Granger causality for the noiseless feedback case}
 \label{sec:gc-noiseless}
 
-Suppose we try to use the direction of greater Granger causal influence to infer the direction of information flow. As discussed in Section~\ref{sec:intro}, one might expect the direction of information flow -- and hence the direction of greater Granger causality -- to be from the transmitter to the receiver.
+%Suppose we try to use the direction of greater Granger causal influence to infer the direction of information flow. As discussed in Section~\ref{sec:intro}, one might expect the direction of information flow -- and hence the direction of greater Granger causality -- to be from the transmitter to the receiver.
 
 In order to compute the Granger causality in the reverse direction (from the receiver to the transmitter), we model $X_i$ as a linear function of its past.
 \begin{equation*}
@@ -320,7 +320,7 @@ where for (a) we have expressed $\Theta$ in terms of $\widehat\Theta_{i-1}$ and 
 	I(X_{i+1};\widehat{\Theta}^{i}|X^{i}) &= \infty \\
 	\Rightarrow I(0*\widehat{\Theta}^{n-1}\rightarrow X^{n}) &= \infty
 \end{align*}
-as expected.
+%as expected.
 
 % Computing Directed Information: noisy feedback ------------------------------
 
@@ -335,7 +335,9 @@ The Directed Information in the forward direction can be written as
 										&= \sum_{i=1}^n \bigg( \frac{1}{2} \log(2 \pi e \text{Var}[\Theta - R_{i-1} + N_i | \widehat\Theta^{i-1}]) \\
 										& \qquad \qquad - \frac{1}{2}\log(2 \pi e \sigma_N^2) \bigg)
 \end{align*}
-For a derivation of this, see appendix~\ref{app:dir-info-fwd-noisy} which appears in~\cite{Allerton15Online}. In the reverse direction,
+For a derivation of this, see appendix~\ref{app:dir-info-fwd-noisy} which appears in~\cite{Allerton15Online}.
+
+In the reverse direction,
 \begin{align*}
 	I(0*\widehat\Theta^{n-1} & \rightarrow X^n) = \sum_{i=0}^{n-1}{I(X_{i+1}; \widehat\Theta^i | X^i)} \\
 							 &= \sum_{i=0}^{n-1}{h(X_{i+1} | X^i) - h(X_{i+1} | X^i, \widehat\Theta^i)} \numberthis \label{eq:dir-info-rev-noisy} \\
@@ -361,6 +363,7 @@ For a given time instant $t$, the $i$\textsuperscript{th} trial is modeled as
 	X_t^{(i)} = \sum_{j=1}^p \alpha_j(t) X_{t-j}^{(i)} + \epsilon_t^{(i)}
 \end{equation*}
 Note that $\alpha_j(t)$ does not depend on $i$. Collecting variables across $N$ trials, we can write the full model in vector form:
+
 \begin{align*}
 	\left[ \!\! \begin{array}{c}
 			X_t^{(1)} \\
@@ -413,9 +416,9 @@ In the noiseless feedback case, the directed information on the forward link is 
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
 	\centering
 	\includegraphics[width=3.2in]{noisy-fb-sigma_r2-point20} \\
-	\vspace{5mm}
+	%\vspace{5mm}
 	\includegraphics[width=3.2in]{noisy-fb-sigma_r2-point35} \\
-	\vspace{5mm}
+	%\vspace{5mm}
 	\includegraphics[width=3.2in]{noisy-fb-sigma_r2-point60}
 	\caption{Plots for forward and backward directed information computations for ${\sigma_R^2}/{\sigma_N^2}=0.2$ (top), $0.35$ (center) and $0.6$ (bottom). In each plot, curves for directed information in both directions are illustrated for ratios ${\sigma_\theta^2}/{\sigma_N^2} = 0.25, 0.5,$ and $1$. The x-axis is the number of iterations of message-passing between the transmitter and the receiver. For cases when feedback noise variance $\sigma_R^2$ is moderately smaller than feedforward noise variance $\sigma_N^2$, directed information in the reverse link can dominate that in the forward link. With sufficiently many (albeit sometimes large, as illustrated in the top figure) iterations, directed information in forward information starts to dominate. However, the point at which this happens depends on the (often unknown) ratio of noise in these links. }
 	\label{fig:numerical}
@@ -430,7 +433,7 @@ We demonstrate, by means of a concrete counter-example, that the direction predi
 
 It might appear that we make a circular argument while computing the Granger Causal influences in our counter-example, since we supply the model for the stochastic process and use the system parameters of the model directly to compute the Granger Causality metric. However, as we state in Section~\ref{sec:estimating-ar-coeffs}, we assume that the regression coefficients of the Autoregressive model can be exactly estimated (even if the AR process is non-stationary), and discuss how this might be achieved with the help of multiple trials.
 
-As a final remark, we emphasize that this work only demonstrates the error in \emph{interpreting} the direction of causal influence as the direction of \emph{information flow}. We do \emph{not} seek to invalidate much of the neuroscientific work that has been done in this direction; we merely caution against making (what might be construed as hopeful) extrapolations from causal influences as to the manner in which information flows.
+As a final remark, we emphasize that this work only demonstrates the error in \emph{interpreting} the direction of causal influence as the direction of \emph{information flow}. We do \emph{not} seek to invalidate much of the neuroscientific work that has been done in this direction; we merely caution against making (what might be construed as hopeful) extrapolations from causal influences to information flows.
 
 We do not seek to understate the importance of determining causal influences in the brain; understanding causal influence itself may have a great deal of benefit. For instance, we might seek to understand the spread of activity in the brain during an epileptic seizure -- in such applications, we are not concerned with how information is being transferred through the neural circuitry; we only seek to determine the source of the activity for the purpose of surgical intervention.
 
@@ -443,7 +446,7 @@ We do not seek to understate the importance of determining causal influences in 
 
 \section*{Acknowledgments}
 
-The authors would like to thank Nicola Elia for discussions that suggested this possible misunderstanding in use of Granger causality and Directed Information in computational systems. We also thank Rob Kass, Momin Malik and Kun Zhang for useful discussions. Finally, we thank the reviewers of a previous submission of this work to ISIT for their insightful remarks and comments. Praveen Venkatesh is partially supported by a dean's fellowship. %Pulkit Grover is supported by [...].
+The authors would like to thank Nicola Elia for discussions that suggested this possible misunderstanding in use of Granger causality and Directed Information in computational systems. We also thank Rob Kass, Bruno Sinopoli, Momin Malik and Kun Zhang for useful discussions. Finally, we thank the reviewers of a previous conference submission of this work for their insightful remarks and comments. We also thank the CMU BrainHUB initiative for support through a Proseed-BrainHUB seed grant. Pulkit Grover was supported through a CMU startup grant, and Praveen Venkatesh through a CMU CIT Dean's fellowship and a CMU Presidential Fellowship.
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,references}
