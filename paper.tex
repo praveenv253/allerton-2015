@@ -20,7 +20,7 @@
 \newcommand{\m}[1]{\mathbf{#1}^m}
 
 \begin{document}
-\title{Is the direction of Granger causal influence the same as the direction of information flow?}
+\title{Is the direction of greater Granger causal influence the same as the direction of information flow?}
 \author{Praveen Venkatesh and Pulkit Grover\\Carnegie Mellon University}
 
 \maketitle
@@ -28,7 +28,7 @@
 % Abstract --------------------------------------------------------------------
 
 \begin{abstract}
-	Granger causality is an established statistical measure of the ``causal influence'' that one stochastic process has on another. Along with its more recent generalization -- Directed Information -- Granger Causality has been used extensively in neuroscience, and in complex interconnected systems in general, to infer statistical causal influences. Of late, many works have begun to interpret the direction of causal influence as the direction of ``information flow''. We ask: is the direction of causal influence, as predicted by Granger Causality and Directed Information always the same as the direction of information flow? We test whether these measures correctly predict the direction of information flow by using two simple theoretical experiments, in which the true direction of information flow (the ``ground truth'') is known by design. The experiments are based on a communication system with a feedback channel, upon which a strategy inspired by the work of Schalkwijk and Kailath is employed. We show that in these experiments, the direction of information flow can be opposite to that which is inferred using Granger causality and Directed Information. Thus, while it might be reasonable to infer the direction of statistical causal influence using these techniques, one needs to exercise care in interpreting the direction of causal influence as the direction of information flow.
+Granger causality is an established statistical measure of the ``causal influence'' that one stochastic process has on another. Along with its more recent generalization -- Directed Information -- Granger Causality has been used extensively in neuroscience, and in complex interconnected systems in general, to infer statistical causal influences. Of late, many works have begun to interpret the direction of causal influence as the direction of ``information flow''. We ask: is the direction of greater causal influence, as predicted by Granger Causality and Directed Information always the same as the direction of information flow? We test whether comparison of these measures in either direction correctly predicts the direction of information flow by using two simple theoretical experiments, in which the true direction of information flow (the ``ground truth'') is known by design. The experiments are based on a communication system with a feedback channel, upon which a strategy inspired by the work of Schalkwijk and Kailath is employed. We show that in these experiments, the direction of information flow can be opposite to the direction of greater Granger causal influence or Directed Information. Thus, while it might be reasonable to infer the direction of statistical causal influence using these techniques, one needs to exercise care in interpreting the direction of causal influence as the direction of information flow.
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
@@ -68,11 +68,11 @@ Granger causality, as originally described by Granger~\cite{Granger1969Investiga
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
 	\centering
 	\includegraphics[width=3.2in]{gc-comparison}
-	\caption{In order to determine the direction of greater causal influence, the Granger Causality metrics in the forward and reverse directions are compared}
+	\caption{In order to determine the direction of greater causal influence, the Granger Causality metrics in the forward and reverse directions are often compared~\cite{Roebroeck2005MappingDirected}.}
 	\label{fig:gc-comparison}
 \end{figure}
 
-In order to determine the direction of \emph{greater} causal influence, the Granger Causality metric (ratio of residual variances) from $\{X\}$ to $\{Y\}$ is often \emph{compared} to that from $\{Y\}$ to $\{X\}$. The direction of causal influence is then taken to be the direction with the greater Granger Causality metric (e.g.~\cite{Brovelli2004BetaOscillations,jiao2013universal}). Further, this direction of causal influence is interpreted to be the direction of information flow, which is the interpretation we question in this paper. We also note that many of these works use a spectral version of Granger Causality, that supplies this metric as a function of frequency. It then becomes possible to also determine the brain wave frequency at which these influences occur. However, we restrict our analysis to the simpler non-spectral version of Granger Causality, since it is sufficient for the purpose of our arguments.
+In order to determine the direction of \emph{greater} causal influence, the Granger Causality metric (ratio of residual variances) from $\{X\}$ to $\{Y\}$ is often \emph{compared} to that from $\{Y\}$ to $\{X\}$. The direction of causal influence is then taken to be the direction with the greater Granger Causality metric (e.g.~\cite{Brovelli2004BetaOscillations,jiao2013universal,Roebroeck2005MappingDirected}, see~\cite{Roebroeck2005MappingDirected} for an understanding of what physical constraints motivate this comparison)). Further, this direction of causal influence is interpreted to be the direction of information flow, which is the interpretation we question in this paper. We also note that many of these works use a spectral version of Granger Causality, that supplies this metric as a function of frequency. It then becomes possible to also determine the brain wave frequency at which these influences occur. However, we restrict our analysis to the simpler non-spectral version of Granger Causality, since it is sufficient for the purpose of our arguments.
 
 We note here that Granger's original analysis does not compare this metric on forward and reverse links, and even the stronger notion of true causality (see remark~\ref{remark:gc-vs-true} in section~\ref{sec:objections-and-shortcomings}) does not involve this comparison. However, this is commonly done in practice even in areas beyond neuroscience (e.g.~\cite{Brovelli2004BetaOscillations,hesse2003use,jiao2013universal}).
 
@@ -224,7 +224,7 @@ We also derive here an expression for $X_i$, which we will use later.
 \subsection{Granger causality for the noiseless feedback case}
 \label{sec:gc-noiseless}
 
-Suppose we try to use the Granger causality measure of directed influence to infer the direction of information flow. As discussed in Section~\ref{sec:intro}, one might expect the direction of information flow -- and hence the direction of greater Granger causality -- to be from the transmitter to the receiver.
+Suppose we try to use the direction of greater Granger causal influence to infer the direction of information flow. As discussed in Section~\ref{sec:intro}, one might expect the direction of information flow -- and hence the direction of greater Granger causality -- to be from the transmitter to the receiver.
 
 In order to compute the Granger causality in the reverse direction (from the receiver to the transmitter), we model $X_i$ as a linear function of its past.
 \begin{equation*}
@@ -288,7 +288,7 @@ The directed information in the forward direction is computed as:
 \end{equation*}
 where $n$ is the number of iterations of the Schalkwijk-Kailath algorithm. For a proof, refer appendix~\ref{app:dir-info-fwd-noiseless}.
 
-In the reverse direction, the Directed Information is infinite.
+In the reverse direction, the Directed Information is $\infty$.
 \begin{align*}
 	I(0*\widehat{\Theta}^{n-1}\rightarrow X^{n}) &= \sum_{i=0}^{n-1}I(X_{i+1};\widehat{\Theta}^{i}|X^{i}) \\
 	I(X_{i+1};\widehat{\Theta}^{i}|X^{i})        &= h(X_{i+1}|X^{i}) - h(X_{i+1}|X^{i},\widehat{\Theta}^{i}) \numberthis \label{eq:dir-info-rev-noiseless}
@@ -415,7 +415,7 @@ In the noiseless feedback case, the directed information on the forward link is 
 	\vspace{5mm}
 	\includegraphics[width=3.2in]{noisy-fb-sigma_r2-point60}
 	\caption{Plots for forward and backward directed information computations for ${\sigma_R^2}/{\sigma_N^2}=0.2$ (top), $0.35$ (center) and $0.6$ (bottom). In each plot, curves for directed information in both directions are illustrated for ratios ${\sigma_\theta^2}/{\sigma_N^2} = 0.25, 0.5,$ and $1$. The x-axis is the number of iterations of message-passing between the transmitter and the receiver. For cases when feedback noise variance $\sigma_R^2$ is moderately smaller than feedforward noise variance $\sigma_N^2$, directed information in the reverse link can dominate that in the forward link. With sufficiently many (albeit sometimes large, as illustrated in the top figure) iterations, directed information in forward information starts to dominate. However, the point at which this happens depends on the (often unknown) ratio of noise in these links. }
-		     \label{fig:numerical}
+	\label{fig:numerical}
 \end{figure}
 
 % Conclusions and discussions -------------------------------------------------
