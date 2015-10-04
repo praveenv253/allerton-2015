@@ -19,16 +19,21 @@
 \newcommand\numberthis{\stepcounter{equation}\tag{\theequation}}
 \newcommand{\m}[1]{\mathbf{#1}^m}
 
-\begin{document}
 \title{Is the direction of greater Granger causal influence the same as the direction of information flow?}
-\author{Praveen Venkatesh and Pulkit Grover\\Carnegie Mellon University}
+
+\author{\authorblockN{Praveen Venkatesh\authorrefmark{1} and Pulkit Grover\authorrefmark{2}}
+\authorblockA{Dept.\ of Electrical and Computer Engineering, Carnegie Mellon University \\
+\authorrefmark{1}vpraveen@cmu.edu, \authorrefmark{2}pulkit@cmu.edu}
+}
+
+\begin{document}
 
 \maketitle
 
 % Abstract --------------------------------------------------------------------
 
 \begin{abstract}
-Granger causality is an established statistical measure of the ``causal influence'' that one stochastic process has on another. Along with its more recent generalization -- Directed Information -- Granger Causality has been used extensively in neuroscience, and in complex interconnected systems in general, to infer statistical causal influences. Of late, many works have begun to interpret the direction of causal influence as the direction of ``information flow''. We ask: is the direction of greater causal influence, as predicted by Granger Causality and Directed Information always the same as the direction of information flow? We test whether comparison of these measures in either direction correctly predicts the direction of information flow by using two simple theoretical experiments, in which the true direction of information flow (the ``ground truth'') is known by design. The experiments are based on a communication system with a feedback channel, upon which a strategy inspired by the work of Schalkwijk and Kailath is employed. We show that in these experiments, the direction of information flow can be opposite to the direction of greater Granger causal influence or Directed Information. Thus, while it might be reasonable to infer the direction of statistical causal influence using these techniques, one needs to exercise care in interpreting the direction of causal influence as the direction of information flow.
+Granger causality is an established statistical measure of the ``causal influence'' that one stochastic process $X$ has on another process $Y$. Along with its more recent generalization -- Directed Information -- Granger Causality has been used extensively in neuroscience, and in complex interconnected systems in general, to infer statistical causal influences. More recently, many works compare have begun to compare the Granger causality metrics from $X$ to $Y$ and from $Y$ to $X$, and interpret the direction of causal influence as the ``direction of information flow''. We ask: is the direction of greater causal influence, as predicted by Granger Causality and Directed Information always the same as the direction of information flow? We test whether comparison of these measures in either direction correctly predicts the direction of information flow by using two simple theoretical experiments, in which the true direction of information flow (the ``ground truth'') is known by design. The experiments are based on a communication system with a feedback channel, upon which a strategy inspired by the work of Schalkwijk and Kailath is employed. We show that in these experiments, the direction of information flow can be opposite to the direction of greater Granger causal influence or Directed Information. Thus, while it might be reasonable to infer the direction of statistical causal influence using these techniques, one needs to exercise care in interpreting the direction of causal influence as the direction of information flow.
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
@@ -50,7 +55,7 @@ In order to understand how the brain performs computations, it could be useful t
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
 	\centering
 	\includegraphics[width=3.2in]{gc-vs-message}
-	\caption{Is the direction of stronger Granger-causal influence necessarily the same as the direction in which the information (or equivalently, the ``message'') is flowing?}
+	\caption{Is the direction of stronger Granger-causal influence necessarily the same as the direction in which the message is flowing?}
 	\label{fig:gc-vs-message}
 \end{figure}
 
@@ -117,7 +122,7 @@ A review of a previous conference submission of this paper had raised some objec
 
 \begin{enumerate}
 	\item \label{remark:gc-vs-true} Previous work has already noted that Granger Causal influence does not imply true causation~\cite{granger1980testing}. This distinction is made rigorously by Judea Pearl~\cite{pearl2009causality-gc-stat}, where he classifies Granger Causality as stemming from a ``statistical'' model, rather than from a ``causal'' model. The argument we make is very similar in spirit: we ask whether or not Granger Causality gives the correct direction of \emph{information flow}. A question on the novelty of our work may therefore be raised: if our argument boils down to a restatement of Pearl's distinction, then this work has no new conceptual contribution. \\
-		We make the case that our argument \emph{is} novel in the following manner: in the systems we consider -- the brain, as well as the communication system in our counter-example -- causal influences exist in both directions. In our counter-example, for instance, the feedback communication algorithm that is employed involves transmissions from both $Tx$ and $Rx$. The transmissions of each depend on what was transmitted by the other in the previous time instant. Causal influence and true causation, therefore, exist in both directions. The information of interest, however, flows in only one direction: from the transmitter to the receiver. We ask whether or not the direction of \emph{this} information flow can be discerned by comparing Granger causal influences in each direction. To this end, we give a concrete counter-example. This work is particularly relevant in the context of modern neuroscience, where such directions of information flow are desired in order to understand brain function.
+		We make the case that our argument \emph{is} novel in the following manner: in the systems we consider -- the brain, as well as the communication system in our counter-example -- causal influences exist in both directions. In our counter-example, for instance, the feedback communication algorithm that is employed involves transmissions from both $Tx$ and $Rx$. The transmissions of each depend on what was transmitted by the other in the previous time instant. Causal influence and true causation, therefore, exist in both directions. The message, however, flows in only one direction: from the transmitter to the receiver. We ask whether or not the direction of \emph{this} information flow can be discerned by comparing Granger causal influences in each direction. To this end, we give a concrete counter-example. This work is particularly relevant in the context of modern neuroscience, where such directions of information flow are desired in order to understand brain function.
 	\item Our analysis does not tackle an information source that evolves with time. Hence, our communication process (inspired from the scheme of Schalkwijk and Kailath~\cite{S&K}) is non-ergodic. Since Granger causality is really just relative errors in prediction of a process, in the presence or absence of knowledge of another process, we compute the obvious generalization of Granger causality to non-ergodic processes. Nevertheless, future work will address a situation with a linear dynamical system as the information source.
 	\item Our experiments restrict themselves to Gaussian noise for simplicity, but neural spiking and spike-rate models for spikes tend to be very different from those used here. This is a clear direction for future work.
 	\item The power and energy constraints are somewhat oversimplified to make the analysis simpler. This is for simplicity of exposition. A more general analysis is a simple extension.
@@ -286,7 +291,7 @@ The directed information in the forward direction is computed as:
 \begin{equation*}
 	I(X^{n} \rightarrow \widehat{\Theta}^{n}) = \frac{1}{2}\log \bigg( 1+\frac{n\sigma_{\theta}^{2}}{\sigma_{N}^{2}} \bigg)
 \end{equation*}
-where $n$ is the number of iterations of the Schalkwijk-Kailath algorithm. For a proof, refer appendix~\ref{app:dir-info-fwd-noiseless}.
+where $n$ is the number of iterations of the Schalkwijk-Kailath algorithm. For a proof, refer appendix~\ref{app:dir-info-fwd-noiseless}, which appears in the full version of this paper~\cite{Allerton15Online}.
 
 In the reverse direction, the Directed Information is $\infty$.
 \begin{align*}
@@ -330,9 +335,7 @@ The Directed Information in the forward direction can be written as
 										&= \sum_{i=1}^n \bigg( \frac{1}{2} \log(2 \pi e \text{Var}[\Theta - R_{i-1} + N_i | \widehat\Theta^{i-1}]) \\
 										& \qquad \qquad - \frac{1}{2}\log(2 \pi e \sigma_N^2) \bigg)
 \end{align*}
-For a derivation of this, see appendix~\ref{app:dir-info-fwd-noisy}.
-
-In the reverse direction,
+For a derivation of this, see appendix~\ref{app:dir-info-fwd-noisy} which appears in~\cite{Allerton15Online}. In the reverse direction,
 \begin{align*}
 	I(0*\widehat\Theta^{n-1} & \rightarrow X^n) = \sum_{i=0}^{n-1}{I(X_{i+1}; \widehat\Theta^i | X^i)} \\
 							 &= \sum_{i=0}^{n-1}{h(X_{i+1} | X^i) - h(X_{i+1} | X^i, \widehat\Theta^i)} \numberthis \label{eq:dir-info-rev-noisy} \\
@@ -340,7 +343,7 @@ In the reverse direction,
 							 & + \sum_{i=2}^{n-1} \bigg( \frac{1}{2} \log \bigg( 2 \pi e \text{Var} \bigg[ R_{i-1} - \frac{N_i}{i} - R_i \bigg| X^i \bigg] \bigg) \\
 							 & \qquad \qquad - \frac{1}{2} \log( 2 \pi e \sigma_R^2 ) \bigg)
 \end{align*}
-For a derivation of this, see appendix~\ref{app:dir-info-rev-noisy}.
+For a derivation of this, see appendix~\ref{app:dir-info-rev-noisy} which appears in~\cite{Allerton15Online}.
 
 % Computing GC and DI: Estimating regression coefficients ---------------------
 
@@ -393,7 +396,7 @@ Note that $\alpha_j(t)$ does not depend on $i$. Collecting variables across $N$ 
 
 If we call the vector on the LHS $\bf{Y}$ and the matrix on the RHS $\bf{X}$, then the vector of $\alpha_j(t)$'s ($\bf{\alpha}(t)$) can be estimated at time instant $t$ using Ordinary Least Squares:
 \begin{equation*}
-\hat{\bf{\alpha}}(t) = (\bf{X}^T \bf{X})^{-1} \bf{X}^T \bf{Y}
+	\hat{\bf{\alpha}}(t) = (\bf{X}^T \bf{X})^{-1} \bf{X}^T \bf{Y}
 \end{equation*}
 This is an unbiased and consistent estimator for $\bf{\alpha}(t)$. This analysis can be trivially extended to the model described by equation~\eqref{eq:ar-model-x-x-theta}. With a sufficiently large number of trials, therefore, the system parameters (to be used as regression coefficients in the Granger Causality analysis) can be estimated to arbitrarily high accuracy.
 
