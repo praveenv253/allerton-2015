@@ -14,6 +14,8 @@
 
 \usepackage{color}
 
+\usepackage{cite}
+
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 \newcommand\numberthis{\stepcounter{equation}\tag{\theequation}}
@@ -22,7 +24,7 @@
 \title{Is the direction of greater Granger causal influence the same as the direction of information flow?}
 
 \author{\authorblockN{Praveen Venkatesh\authorrefmark{1} and Pulkit Grover\authorrefmark{2}}
-\authorblockA{Dept.\ of Electrical and Computer Engineering, Carnegie Mellon University \\
+\authorblockA{Electrical \& Computer Engineering, and the Center for the Neural Basis of Cognition, Carnegie Mellon University \\
 \authorrefmark{1}vpraveen@cmu.edu, \authorrefmark{2}pulkit@cmu.edu}
 }
 
@@ -147,8 +149,7 @@ A review of a previous conference submission of this paper had raised some objec
 
 This section summarizes the analysis in the work of Schalkwijk and Kailath~\cite{S&K}, and a simple (and previously known) extension to a noisy feedback case. It also establishes the model and the notation used in the paper.
 
-The transmitter wants to convey a single zero-mean random number, $\Theta$, having variance
-$\sigma_\theta^2$, to the receiver. $\Theta$ could be obtained, for instance, by quantizing a bounded interval on the real line (e.g. $[-1,1]$), as is done in the scheme of Schalkwijk and Kailath~\cite{S&K}. The forward channel is an AWGN channel with noise variance $\sigma_N^2$. We will use simple linear communication strategies for a noiseless feedback channel, as well as an AWGN feedback channel with noise variance $\sigma_R^2$. In both cases, the estimators will be shown to be unbiased and consistent (the error mean is zero, and the error variance converges to zero).
+The transmitter wants to convey a single zero-mean random number, $\Theta$, having variance $\sigma_\theta^2$, to the receiver. $\Theta$ could be obtained, for instance, by quantizing a bounded interval on the real line (e.g. $[-1,1]$), as is done in the scheme of Schalkwijk and Kailath~\cite{S&K}. The forward channel is an AWGN channel with noise variance $\sigma_N^2$. We will use simple linear communication strategies for a noiseless feedback channel, as well as an AWGN feedback channel with noise variance $\sigma_R^2$. In both cases, the estimators will be shown to be unbiased and consistent (the error mean is zero, and the error variance converges to zero).
 
 % S&K: Noiseless feedback -----------------------------------------------------
 
@@ -211,13 +212,6 @@ Linear strategies are known to be suboptimal for this communication problem~\cit
 	\widehat\Theta_i  &= \Theta + \frac{1}{i} \sum_{k=1}^i N_k - \frac{1}{i} \sum_{k=1}^{i-1} R_k \numberthis \label{eq:theta_hat_i-noisy}
 \end{align*}
 where $(a)$ is obtained by expanding $\widehat{\Theta}_j$ recursively for $j=i-1,i-2,\ldots,2$. Therefore, the error in estimating $\Theta$ converges to $0$ in mean-square sense (\textit{i.e.}, $\widehat{\Theta}_i$ is a consistent estimate of $\Theta_i$ even in the presence of noise on the feedback link).
-
-We also derive here an expression for $X_i$, which we will use later.
-\begin{align*}
-	X_i &= \Theta - \widehat\Theta_{i-1} - R_{i-1} \\
-	&= \Theta - \bigg( \Theta + \frac{1}{i-1} \sum_{k=1}^{i-1} N_k - \frac{1}{i-1} \sum_{k=1}^{i-2} R_k \bigg) - R_{i-1} \\
-	&= \frac{1}{i-1} \sum_{k=1}^{i-2} R_k - \frac{1}{i-1} \sum_{k=1}^{i-1} N_k - R_{i} \numberthis \label{eq:x_i-noisy}
-\end{align*}
 
 % Computing GC and Directed Information ---------------------------------------
 
@@ -335,9 +329,7 @@ The Directed Information in the forward direction can be written as
 										&= \sum_{i=1}^n \bigg( \frac{1}{2} \log(2 \pi e \text{Var}[\Theta - R_{i-1} + N_i | \widehat\Theta^{i-1}]) \\
 										& \qquad \qquad - \frac{1}{2}\log(2 \pi e \sigma_N^2) \bigg)
 \end{align*}
-For a derivation of this, see appendix~\ref{app:dir-info-fwd-noisy} which appears in~\cite{Allerton15Online}.
-
-In the reverse direction,
+For a derivation of this, see appendix~\ref{app:dir-info-fwd-noisy} which appears in~\cite{Allerton15Online}. In the reverse direction,
 \begin{align*}
 	I(0*\widehat\Theta^{n-1} & \rightarrow X^n) = \sum_{i=0}^{n-1}{I(X_{i+1}; \widehat\Theta^i | X^i)} \\
 							 &= \sum_{i=0}^{n-1}{h(X_{i+1} | X^i) - h(X_{i+1} | X^i, \widehat\Theta^i)} \numberthis \label{eq:dir-info-rev-noisy} \\
@@ -363,7 +355,6 @@ For a given time instant $t$, the $i$\textsuperscript{th} trial is modeled as
 	X_t^{(i)} = \sum_{j=1}^p \alpha_j(t) X_{t-j}^{(i)} + \epsilon_t^{(i)}
 \end{equation*}
 Note that $\alpha_j(t)$ does not depend on $i$. Collecting variables across $N$ trials, we can write the full model in vector form:
-
 \begin{align*}
 	\left[ \!\! \begin{array}{c}
 			X_t^{(1)} \\
@@ -446,7 +437,9 @@ We do not seek to understate the importance of determining causal influences in 
 
 \section*{Acknowledgments}
 
-The authors would like to thank Nicola Elia for discussions that suggested this possible misunderstanding in use of Granger causality and Directed Information in computational systems. We also thank Rob Kass, Bruno Sinopoli, Momin Malik and Kun Zhang for useful discussions. Finally, we thank the reviewers of a previous conference submission of this work for their insightful remarks and comments. We also thank the CMU BrainHUB initiative for support through a Proseed-BrainHUB seed grant. Pulkit Grover was supported through a CMU startup grant, and Praveen Venkatesh through a CMU CIT Dean's fellowship and a CMU Presidential Fellowship.
+The authors would like to thank Nicola Elia for discussions that suggested this possible misunderstanding in use of Granger causality and Directed Information in computational systems. We also thank Rob Kass, Bruno Sinopoli, Momin Malik and Kun Zhang for useful discussions. Finally, we thank the reviewers of a previous conference submission of this work for their insightful remarks and comments. We thank the CMU BrainHUB initiative for support through a Proseed-BrainHUB seed grant. Pulkit Grover was supported through a CMU startup grant, and Praveen Venkatesh through a CMU CIT Dean's fellowship and a CMU Presidential Fellowship.
+
+\IEEEtriggeratref{8}
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,references}
@@ -538,6 +531,13 @@ From equations \eqref{eq:h_theta_theta-noisy} and \eqref{eq:h_theta_x_theta-nois
 
 \section{Directed Information in the reverse direction, with noisy feedback}
 \label{app:dir-info-rev-noisy}
+
+First, we derive an expression for $X_i$, which we will use later.
+\begin{align*}
+	X_i &= \Theta - \widehat\Theta_{i-1} - R_{i-1} \\
+	&= \Theta - \bigg( \Theta + \frac{1}{i-1} \sum_{k=1}^{i-1} N_k - \frac{1}{i-1} \sum_{k=1}^{i-2} R_k \bigg) - R_{i-1} \\
+	&= \frac{1}{i-1} \sum_{k=1}^{i-2} R_k - \frac{1}{i-1} \sum_{k=1}^{i-1} N_k - R_{i} \numberthis \label{eq:x_i-noisy}
+\end{align*}
 
 \begin{align*}
 	I(0*\widehat\Theta^{n-1} \rightarrow X^n) &= \sum_{i=0}^{n-1}{I(X_{i+1}; \widehat\Theta^i | X^i)} \\
